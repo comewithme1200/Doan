@@ -30,6 +30,7 @@ const MovieCarousel = () => {
         {src: 'assets/raw.jpg'},
         {src: 'assets/midsoma.jpg'},
     ];
+    console.log(movieOnAir);
     return (
         <div className='Movie__carousel-containter'>
             <div className='Movie__carousel-header'>

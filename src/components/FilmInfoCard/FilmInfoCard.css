@@ -1,0 +1,37 @@
+.FilmInfoCard__outterContainer {
+    width: 97%;
+    margin: 0 auto;
+}
+
+.hr__filmInfo {
+    margin-top: 5px;
+}
+
+.FilmInfoCard__cinemaName {
+    margin-top: 5px;
+    font-size: 32px;
+    font-weight: 300;
+    color: grey;
+}
+
+.FilmInfoCard__roomName {
+  
+}
+
+.FilmInfoCard__time {
+    border: 0.5px solid #AAAAAA;
+    display: inline-block;
+    padding: 5px 15px 5px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.FilmInfoCard__time:hover {
+    border: 1px solid black;
+}
+
+.style {
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: 50;
+}
