@@ -1,0 +1,36 @@
+.Sale__container {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 100%;
+    background-image: url('../../assets/bg-home-02.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    margin-bottom: 0;
+}
+.Sale__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.Sale__header a {
+    margin-top: 50px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.Sale__header a:hover {
+    cursor: pointer;
+}
+
+.Sale__carousel {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh; 
+}

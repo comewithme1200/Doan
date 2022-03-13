@@ -1,0 +1,50 @@
+.Detail__container {
+    display: flex;
+    background-color: #FDFCF0;
+    flex-direction: column;
+}
+.Detail__container-header {
+    width: 99%;
+    margin: 0 auto;
+}
+
+.DateCard_container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px 5px 20px;
+    border: 2px solid #FDFCF0;
+    border-radius: 5px;
+}
+
+.active {
+    border: 2px solid black;
+}
+
+.DateCard_container:hover {
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+.hr1 {
+    border-top: 2px solid black;
+    margin: 10px 0 10px 0;
+}
+
+.Datecard_container {
+    display: flex;
+}
+.place_container {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.place_container button {
+    border: none;
+    padding: 10px;
+    margin: 0 5px 0 5px;
+    background-color: #FDFCF0;
+}
+
+.place_container button:hover {
+    cursor: pointer;
+}

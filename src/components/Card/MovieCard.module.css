@@ -1,0 +1,27 @@
+.container {
+    box-sizing: border-box;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.cardAction button{
+    border-radius: 5px;
+    width: 100%;
+    height: 50px;
+    background-color: #4EAF46;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+.cardAction button:hover {
+    background-color: white;
+    color: #4EAF46;
+}
+.cardText h3 {
+    justify-content: center;
+}
+
+.cardImage img {
+    height: 275px
+}

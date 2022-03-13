@@ -1,0 +1,43 @@
+.Movie__carousel-containter {
+    display: flex;
+    flex-direction: column;
+    background-image: url('../../assets/movie-details-bg.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+.Movie__carousel {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60vh; 
+}
+
+.Movie__carousel-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.Movie__carousel-header a {
+    margin: 0px 5px 0px 5px;
+    font-size: 24px;
+}
+
+.Movie__carousel-header a:hover {
+    border-bottom: 1px solid gold;
+    color: gold;
+    cursor: pointer;
+}
+
+.highlight {
+    border-bottom: 1px solid gold;
+    color: gold;
+}
+.Header-wrap {
+    margin-top: 50px;
+}
