@@ -5,6 +5,7 @@ import images from '../../constants/images';
 import './Navbar.css';
 import { useDispatch } from 'react-redux';
 import { toggleLoginScreen, toggleMainScreen } from '../../redux/action';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
@@ -23,7 +24,9 @@ const Navbar = () => {
   return (
     <nav className="app__navbar">
       <div className="app__navbar-logo">
-        <img src={images.gericht} alt="app__logo" onClick={() => handleLogoClick()}/>
+        <Link to="/">
+          <img src={images.gericht} alt="app__logo"/>
+        </Link>
       </div>
       <ul className="app__navbar-links">
         <li className="p__opensans"><a href="#schedual">Lịch chiếu</a></li>
@@ -32,7 +35,9 @@ const Navbar = () => {
         <li className="p__opensans"><a href="#about">Về chúng tôi</a></li>
       </ul>
       <div className="app__navbar-login">
-        <a href="#login" className="p__opensans" onClick={() => handleLoginBtn()}>ĐĂNG NHẬP</a>
+        <Link to="/login">
+          <a href="#login" className="p__opensans" onClick={() => handleLoginBtn()}>ĐĂNG NHẬP</a>
+        </Link>
         <div />
         <a href="/" className="p__opensans">MUA VÉ</a>
       </div>

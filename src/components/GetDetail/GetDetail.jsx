@@ -47,7 +47,7 @@ const GetDetail = () => {
                 <hr className='hr1'></hr>
                 <div className='Datecard_container'>
                         {dayList.map((day, i) => (
-                            <div className={`DateCard_container ${day.isActive ? 'active' : ''}`} key={i} onClick = {() => setActive(i)}>
+                            <div className={`DateCard_container ${day.isActive ? 'activeDate' : ''}`} key={i} onClick = {() => setActive(i)}>
                                 <DateCard {...day}/>
                             </div>
                         ))}

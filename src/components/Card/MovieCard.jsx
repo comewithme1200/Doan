@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styles from "./MovieCard.module.css";
 import { toggleBuyScreen } from '../../redux/action';
+import { Link } from 'react-router-dom';
 
 const MovieCard = (props) => {
     const dispatch = useDispatch();
@@ -20,7 +21,9 @@ const MovieCard = (props) => {
                 <h3>Movie Name</h3>
             </div>
             <div className={styles.cardAction}>
-                <button onClick={() => handleBuyBtn()}>MUA VÉ</button>
+                <Link to="/getDetail">
+                    <button onClick={() => handleBuyBtn()}>MUA VÉ</button>
+                </Link>
             </div>
         </div>
     );

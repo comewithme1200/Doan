@@ -1,27 +1,51 @@
 import React from 'react';
-import styles from "./Login.module.css";
+import styles from "./Login.css";
+import { Form, Input, Button, Checkbox } from 'antd';
+
 const Login = () => {
+    const onFinish = (values) => {
+        console.log('Success:', values);
+      };
+    
+      const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+      };
     return (
-        <div className={styles.wrapper}>
-                <form action="#" className={styles.login}>
-                    <div className={styles.field}>
-                        <input type="text" placeholder="Email Address" required/>
-                    </div>
-                    <div className={styles.field}>
-                        <input type="password" placeholder="Password" required/>
-                    </div>
-                    <div className={styles.pass_link}>
-                        <a href="#">Forgot password?</a>
-                    </div>
-                    <div className="field btn">
-                        <div className={styles.btn_layer}></div>
-                        <input type="submit" value="Login"/>
-                    </div>
-                    <div className={styles.signup_link}>
-                        Not a member? <a href="">Signup now</a>
-                    </div>
-                </form>
-        </div>
+        <Form
+            name="basic"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+            >
+            <Form.Item
+                label="Username"
+                name="username"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+            >
+                <Input />
+            </Form.Item>
+
+            <Form.Item
+                label="Password"
+                name="password"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+            >
+                <Input.Password />
+            </Form.Item>
+
+            <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+                <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                <Button type="primary" htmlType="submit">
+                Submit
+                </Button>
+            </Form.Item>
+        </Form>
     );
 };
 
