@@ -10,7 +10,7 @@
 .FilmInfoCard__cinemaName {
     margin-top: 5px;
     font-size: 32px;
-    font-weight: 300;
+    font-weight: 500;
     color: grey;
 }
 
@@ -33,5 +33,6 @@
 .style {
     margin-top: 5px;
     font-size: 18px;
-    font-weight: 50;
+    font-weight: 500;
+    color: black;
 }

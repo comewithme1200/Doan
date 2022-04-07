@@ -4,7 +4,8 @@ import './MovieCarousel.css'
 import MovieCard from '../Card/MovieCard';
 
 
-const MovieCarousel = () => {
+const MovieCarousel = (props) => {
+    const movieData = props.data;
     const [toggleMovieList, setToggleMovieList] = React.useState(false);
     const breakPoints = [
         { width: 1, itemsToShow: 2 },
@@ -30,7 +31,11 @@ const MovieCarousel = () => {
         {src: 'assets/raw.jpg'},
         {src: 'assets/midsoma.jpg'},
     ];
-    console.log(movieOnAir);
+    // console.log("This is data");
+    // console.log(movieData);
+    // const movieOnAir = movieData['moviesOnAir'];
+    // const movieAboutToRelease = movieData.moviesAboutOnAir;
+    // console.log(movieAboutToRelease);
     return (
         <div className='Movie__carousel-containter'>
             <div className='Movie__carousel-header'>

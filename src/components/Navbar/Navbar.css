@@ -32,7 +32,16 @@
     cursor: pointer;
 }
 
-.app__navbar-links li:hover {
+.app__navbar-links li a{
+    margin: 0 1rem;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+
+.app__navbar-links li a:hover {
     color: var(--color-grey);
 }
 
@@ -46,6 +55,11 @@
     margin: 0 1rem;
     text-decoration: none;
     transition: .5s ease;
+    color: white;
+}
+
+.app__navbar-login a:hover {
+    color: grey;
 }
 
 .app__navbar-login div {

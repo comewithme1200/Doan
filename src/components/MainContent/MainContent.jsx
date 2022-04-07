@@ -3,11 +3,11 @@ import Slider from '../Slider/Slider';
 import MovieCarousel from '../MovieSlider/MovieCarousel';
 import SaleCarousel from '../SaleSlider/SaleCarousel';
 
-const MainContent = () => {
+const MainContent = (props) => {
     return (
         <div>
             <Slider />
-            <MovieCarousel />
+            <MovieCarousel data={props.data}/>
             <SaleCarousel />
         </div>
     );

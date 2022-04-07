@@ -26,6 +26,7 @@
 .Movie__carousel-header a {
     margin: 0px 5px 0px 5px;
     font-size: 24px;
+    color: white;
 }
 
 .Movie__carousel-header a:hover {

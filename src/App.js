@@ -10,29 +10,26 @@ import Login from './components/Login/Login';
 import { Routes, Route } from 'react-router-dom';
 import MainContent from './components/MainContent/MainContent';
 import BuyProcess from './components/BuyProcess/BuyProcess';
+import axios from 'axios';
 
 
 const App = () => {
-  const toggleScreen = useSelector((state) => state.toggleScreen);
-
+  var mainContentMoviesData = {};
+  axios.get('/movies').then( res => {
+    mainContentMoviesData.moviesAboutOnAir = res.data.moviesAboutOnAir;
+    mainContentMoviesData.moviesOnAir = res.data.moviesOnAir;
+  }).catch(err => {
+    console.log(err);
+  })
   return (
     <div>
       <Navbar />
       <Routes>
         <Route path='/getDetail' element={<GetDetail/>}/>
-        <Route path='/' element={<MainContent/>}/>
+        <Route path='/' element={<MainContent data={mainContentMoviesData}/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/buyprocess' element={<BuyProcess/>}/>
       </Routes>
-      {/* {toggleScreen.screen == "buy" && (
-        <GetDetail />
-      )}
-      {toggleScreen.screen == "main" && (
-        <MainContent/>      
-      )}
-      {toggleScreen.screen == "login" && (
-        <Login/>
-      )} */}
       <Footer />
     </div>
   )};

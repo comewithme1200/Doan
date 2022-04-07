@@ -1,51 +1,41 @@
 import React from 'react';
 import styles from "./Login.css";
-import { Form, Input, Button, Checkbox } from 'antd';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const Login = () => {
-    const onFinish = (values) => {
-        console.log('Success:', values);
-      };
-    
-      const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
+    const handleLogin = (e) => {
+        e.preventDefault();
+        console.log("Login");
+        const loginData = {
+            email: getData.email,
+            password: getData.password
+        }
+
+        axios.post('users/login', loginData).then(res => {
+            console.log(res);
+            localStorage.setItem('token', res.data.token);
+        }).catch(err => {
+            console.log(err);
+        })
+    };
+
+    const getData = {}
+
     return (
-        <Form
-            name="basic"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            >
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
-            >
-                <Input />
-            </Form.Item>
+        <form onSubmit={handleLogin}>
+            <h3>Login</h3>
+            <div className='form-group'>
+                <label>Email</label>
+                <input type="email" className='form-control' placeholder='Email' onChange={e => getData.email = e.target.value}/>
+            </div>
+            <div className='form-group'>
+                <label>Password</label>
+                <input type="password" className='form-control' placeholder='Password' onChange={e => getData.password = e.target.value}/>
+            </div>
 
-            <Form.Item
-                label="Password"
-                name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-                <Input.Password />
-            </Form.Item>
-
-            <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
-                Submit
-                </Button>
-            </Form.Item>
-        </Form>
+            <button className='btn btn-primary btn-block'>Login</button>
+        </form>
     );
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Steps, Button, message, Card } from 'antd';
 import "./BuyProcess.css"
+import 'antd/dist/antd.css'
 
 const { Step } = Steps;
 

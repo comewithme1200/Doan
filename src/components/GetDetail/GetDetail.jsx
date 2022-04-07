@@ -28,7 +28,6 @@ for (let i = 1; i <= 14; i++) {
 }
 const GetDetail = () => {
     const [dayList, setDayList] = React.useState(dayListTmp);
-    const placeList = ["Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Cần Thơ", "Quảng Ninh", "Hải Dương", "Bắc Ninh", "Tuyên Quang", "Hà Giang", "Nha Trang"];
     const filmInfo = [
         {cinemaName: "LC Hùng Vương", info: [{roomName: "Rạp 2D" , time: ["20:20"]}, {roomName: "Rạp Golden" , time: ["21:00"]}]},
         {cinemaName: "LC Bà Triệu", info: [{roomName: "Rạp 2D" , time: ["20:00", "22:00"]}]}
@@ -55,10 +54,6 @@ const GetDetail = () => {
                 <hr className='hr1'></hr>
             </div>
             <div className='place_container'>
-                {placeList.map((place) => (
-                    <button>{place}</button>
-                ))}  
-                <hr className='hr1'></hr>
                 <FilmInfoCard filmInfo={filmInfo}/>
             </div>
             
