@@ -4,21 +4,21 @@ import styles from "./MovieCard.module.css";
 import { toggleBuyScreen } from '../../redux/action';
 import { Link } from 'react-router-dom';
 
-const MovieCard = (props) => {
+const MovieCard = ({data: {movie_name, src}}) => {
     const dispatch = useDispatch();
     const handleBuyBtn = () => {
         dispatch(
             toggleBuyScreen()
         );
     };
-    
+
     return (
         <div className={styles.container}>
             <div className={styles.cardImage}>
-                <img alt="Poster" src={props.src} />
+                <img alt="Poster" src="assets/midsoma.jpg"/>
             </div>
             <div className={styles.cardText}>
-                <h3>Movie Name</h3>
+                <h4>{movie_name}</h4>
             </div>
             <div className={styles.cardAction}>
                 <Link to="/getDetail">

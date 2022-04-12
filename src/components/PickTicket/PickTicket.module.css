@@ -1,0 +1,65 @@
+.pick_ticket_container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.pick_ticket_filmInfo_container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.pick_ticket_cart {
+    justify-content: flex-end;
+}
+
+.pick_ticket_filmInfo{
+    display: flex;
+}
+
+.pick_ticket_ticketInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.pick_ticket_noteList{
+    font-size: 16px;
+}
+
+.pick_ticket_cart {
+    background-color: grey;
+    color: white;
+}
+
+.pick_ticket_choose_ticket {
+    border: solid 1px green;
+    overflow-x:auto;
+}
+
+th, td{
+    padding: 10px;
+    text-align: center;
+}
+
+h2 {
+    color: red;
+}
+
+@media screen and (max-width: 900px) {
+    .pick_ticket_filmInfo_container{
+        flex-direction: column;
+    }
+    .pick_ticket_cart {
+        width: 100%;
+    }
+    .pick_ticket_filmInfo {
+        flex-direction: column;
+    }
+    .pick_ticket_container {
+        width: 100%;
+    }
+    .pick_ticket_choose_ticket {
+        width: 100%;
+    }
+}

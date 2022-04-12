@@ -1,8 +1,6 @@
 .steps-content {
     min-height: 200px;
-    margin-top: 16px;
-    padding-top: 80px;
-    text-align: center;
+    margin-top: 50px;
     background-color: #fafafa;
     border: 1px dashed #e9e9e9;
     border-radius: 2px;
@@ -17,4 +15,16 @@ border: 1px dashed #303030;
 background-color: rgba(255,255,255,0.04);
 color: rgba(255,255,255,0.65);
 padding-top: 80px;
+}
+.buy_process_container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .steps-content {
+    width: 100%;
+  }
 }

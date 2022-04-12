@@ -14,19 +14,12 @@ import axios from 'axios';
 
 
 const App = () => {
-  var mainContentMoviesData = {};
-  axios.get('/movies').then( res => {
-    mainContentMoviesData.moviesAboutOnAir = res.data.moviesAboutOnAir;
-    mainContentMoviesData.moviesOnAir = res.data.moviesOnAir;
-  }).catch(err => {
-    console.log(err);
-  })
   return (
     <div>
       <Navbar />
       <Routes>
         <Route path='/getDetail' element={<GetDetail/>}/>
-        <Route path='/' element={<MainContent data={mainContentMoviesData}/>}/>
+        <Route path='/' element={<MainContent/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/buyprocess' element={<BuyProcess/>}/>
       </Routes>

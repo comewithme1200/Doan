@@ -1,0 +1,53 @@
+.pick_seat_outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pick_seat_screen {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    background-color: grey;
+    text-align: center;
+    width: 100%;
+}
+
+.pick_seat_container {
+    margin-top: 5vh;
+}
+
+.seat {
+    background-color: #444451;
+    height: 26px;
+    width: 32px;
+    margin: 3px;
+    font-size: 12px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+    color: white;
+}
+
+.seat.selected {
+    background-color: green;
+}
+
+.seat.sold {
+    background-color: #fff;
+}
+
+
+.seat:not(.sold):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.row {
+    display: flex;
+}
+
+.sold {
+    background-color: red;
+}

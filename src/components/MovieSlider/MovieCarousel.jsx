@@ -5,7 +5,6 @@ import MovieCard from '../Card/MovieCard';
 
 
 const MovieCarousel = (props) => {
-    const movieData = props.data;
     const [toggleMovieList, setToggleMovieList] = React.useState(false);
     const breakPoints = [
         { width: 1, itemsToShow: 2 },
@@ -13,65 +12,43 @@ const MovieCarousel = (props) => {
         { width: 768, itemsToShow: 4 },
         { width: 1200, itemsToShow: 6 },
     ];
-    const movieOnAir = [
-        {src: 'assets/freedom.jpg'},
-        {src: 'assets/mars.jpg'},
-        {src: 'assets/joker.jpg'},
-        {src: 'assets/thehill.jpg'},
-        {src: 'assets/avenger.jpg'},
-        {src: 'assets/moonlight.jpg'},
-        {src: 'assets/raw.jpg'},
-        {src: 'assets/midsoma.jpg'},
-    ];
-    const movieAboutToRelease = [
-        {src: 'assets/freedom.jpg'},
-        {src: 'assets/mars.jpg'},
-        {src: 'assets/joker.jpg'},
-        {src: 'assets/thehill.jpg'},
-        {src: 'assets/raw.jpg'},
-        {src: 'assets/midsoma.jpg'},
-    ];
-    // console.log("This is data");
-    // console.log(movieData);
-    // const movieOnAir = movieData['moviesOnAir'];
-    // const movieAboutToRelease = movieData.moviesAboutOnAir;
-    // console.log(movieAboutToRelease);
+    const movieOnAir = props?.data?.moviesOnAir;
+    const movieAboutToRelease = props?.data?.moviesAboutOnAir;
     return (
         <div className='Movie__carousel-containter'>
             <div className='Movie__carousel-header'>
-                { !toggleMovieList && (
+                {!toggleMovieList && (
                     <div className='Header-wrap'>
                         <a className='highlight' onClick={() => setToggleMovieList(false)}>PHIM ĐANG CHIẾU</a>
                         <a onClick={() => setToggleMovieList(true)}>PHIM SẮP CHIẾU</a>
                     </div>
                 )}
-                { toggleMovieList && (
+                {toggleMovieList && (
                     <div className='Header-wrap'>
                         <a onClick={() => setToggleMovieList(false)}>PHIM ĐANG CHIẾU</a>
                         <a className='highlight' onClick={() => setToggleMovieList(true)}>PHIM SẮP CHIẾU</a>
                     </div>
                 )}
-                
+
             </div>
-            { !toggleMovieList && ( 
+            {!toggleMovieList ? (
                 <div className='Movie__carousel'>
                     <Carousel breakPoints={breakPoints}>
-                        {movieOnAir.map((movie) => (
-                            <MovieCard src={movie.src}/>
+                        {movieOnAir?.map((movie) => (
+                            <MovieCard data={movie} key={movie.id} />
+                        ))}
+                    </Carousel>
+                </div>
+            ) : (
+                <div className='Movie__carousel'>
+                    <Carousel breakPoints={breakPoints}>
+                        {movieAboutToRelease?.map((movie) => (
+                            <MovieCard data={movie} key={movie.id} />
                         ))}
                     </Carousel>
                 </div>
             )}
-            { toggleMovieList && ( 
-                <div className='Movie__carousel'>
-                    <Carousel breakPoints={breakPoints}>
-                        {movieAboutToRelease.map((movie) => (
-                            <MovieCard src={movie.src}/>
-                        ))}
-                    </Carousel>
-                </div>
-            )}
-        </div>  
+        </div>
     );
 };
 
