@@ -1,9 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { QuantityPicker } from 'react-qty-picker';
-
+import { useDispatch } from 'react-redux';
+import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
 import styles from "./PickTicket.module.css";
 
 const PickTicket = () => {
+
+    const dispatch = useDispatch();
+
     const data = [
         {
             name: "Adult Standard 2D",
@@ -20,10 +24,12 @@ const PickTicket = () => {
 
     const getStandardPickerValue = (value) => {
         setPriceStandard(value * 90000);
+        dispatch(changeStandardTicketNumber(value))
     }
 
     const getVIPPickerValue = (value) => {
         setPriceVIP(value * 100000);
+        dispatch(changeVipTicketNumber(value))
     }
     return (
         <div className={styles.pick_ticket_container}>

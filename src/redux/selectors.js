@@ -1,0 +1,1 @@
+export const ticketNumberSelector = (state) => state.ticketNumber;

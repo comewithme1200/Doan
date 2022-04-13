@@ -1,17 +1,13 @@
-export const toggleLoginScreen = () => {
+export const changeStandardTicketNumber = (number) => {
     return {
-        type: 'login'
+        type: 'changeStandardTicketNumber',
+        payload: number
     }
-};
+}
 
-export const toggleBuyScreen = () => {
+export const changeVipTicketNumber = (number) => {
     return {
-        type: 'buy'
+        type: 'changeVipTicketNumber',
+        payload: number
     }
-};
-
-export const toggleMainScreen = () => {
-    return {
-        type: 'main'
-    }
-};
+}

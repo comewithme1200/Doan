@@ -1,33 +1,29 @@
 const initialValue = {
-    toggleScreen: { 
-        screen: 'main'
+    ticketNumber: { 
+        standard : 0,
+        vip: 0
     }
 };
 
 const rootReducer = (state = initialValue, action) => {
     console.log({state, action});
     switch (action.type){
-        case "login":
+        case 'changeStandardTicketNumber':
             return {
                 ...state,
-                toggleScreen: {
-                    screen: 'login'
+                ticketNumber: {
+                    ...state.ticketNumber,
+                    standard: action.payload
                 }
-            };
-        case "buy":
+            }
+        case 'changeVipTicketNumber':
             return {
                 ...state,
-                toggleScreen: {
-                    screen: 'buy'
+                ticketNumber: {
+                    ...state.ticketNumber,
+                    vip: action.payload
                 }
-            };
-        case "main":
-            return {
-                ...state,
-                toggleScreen: {
-                    screen: 'main'
-                }
-            };
+            }
         default:
             return state;
 

@@ -4,13 +4,25 @@ import "./BuyProcess.css"
 import 'antd/dist/antd.css'
 import PickTicket from '../PickTicket/PickTicket';
 import PickSeat from '../PickSeat/PickSeat';
+import { ticketNumberSelector } from '../../redux/selectors'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
 
 const { Step } = Steps;
 
 const BuyProcess = () => {
   const [current, setCurrent] = React.useState(0);
   const [roomId, setRoomId] = React.useState('');
+  const [premiereId, setPremiereId] = React.useState('');
   const [isModalVisible, setIsModalVisible] = React.useState(false);
+
+  const dispatch = useDispatch();
+
+  const ticketNumber = useSelector(ticketNumberSelector);
+
+  console.log(ticketNumber);
+
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -31,7 +43,7 @@ const BuyProcess = () => {
     },
     {
       title: 'Chọn ghế',
-      content: <PickSeat roomId={roomId}/>,
+      content: <PickSeat roomId={roomId} ticketNumber={ticketNumber} premiereId={premiereId}/>,
     },
     {
       title: 'Xác nhận',
@@ -45,12 +57,29 @@ const BuyProcess = () => {
 
 
     const next = () => {
+      if (current === 0) {
+        if (ticketNumber.standard + ticketNumber.vip > 0) {
+          setCurrent(current + 1);
+          setRoomId('837175f7-1a06-4605-86ad-8bb4b3b6b0c3');
+          setPremiereId('75a3c30e-5b00-41d6-bde0-9c3edde9ee9a');
+        } else {
+          alert("Chưa chọn vé");
+        }
+      } else {
         setCurrent(current + 1);
-        setRoomId('837175f7-1a06-4605-86ad-8bb4b3b6b0c3');
+      }
+      
     };
 
     const prev = () => {
+      if (current === 1) {
         setCurrent(current - 1);
+        dispatch(changeStandardTicketNumber(0));
+        dispatch(changeVipTicketNumber(0));
+      } else {
+        setCurrent(current - 1);
+      }
+        
     };
     return (
         <div className='buy_process_container'>
