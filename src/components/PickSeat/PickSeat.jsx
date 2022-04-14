@@ -1,14 +1,68 @@
 import React from 'react';
 import axios from 'axios';
 import styles from "./PickSeat.module.css";
+import { ticketNumberSelector } from '../../redux/selectors'
+import { useSelector, useDispatch } from 'react-redux';
+import { changeSeatQuantity } from '../../redux/action'
 
 import Countdown from 'react-countdown';
 
 const PickSeat = (props) => {
 
     const [seatsData, setSeatsData] = React.useState([]);
-    const [seatOccupiedData, setSeatOccupiedData] = React.useState([]);
-   
+    const [seatChoosenNumber, setSeatChoosenNumber] = React.useState(1);
+
+    const dispatch = useDispatch();
+
+    const ticketNumber = useSelector(ticketNumberSelector);
+
+    // console.log(ticketNumber);
+
+    const handleTimeout = () => {
+
+    }
+    
+    const handleChooseSeat = (status, id) => {
+        console.log(seatChoosenNumber + " " + ticketNumber.standard + ticketNumber.vip);
+        if (seatChoosenNumber < ticketNumber.standard + ticketNumber.vip || status === 3) {
+            if (status === 2) {
+                const seatDataClone = [...seatsData];
+                for(var seat of seatDataClone) {
+                    for(var seatNumber of seat.seatNumberArrayList) {
+                        if (seatNumber.id === id) {
+                            seatNumber.status = 3;
+                        }
+                    }
+                }
+                console.log("before add: " + seatChoosenNumber);
+                setSeatChoosenNumber(seatChoosenNumber + 1);
+                console.log("after add: " + seatChoosenNumber)
+                dispatch(changeSeatQuantity(seatChoosenNumber));
+                setSeatsData(seatDataClone);
+            } else {
+                if (status === 0) {
+                    alert("Ghế đang được người khác chọn")
+                } else if (status === 3){
+                    const seatDataClone = [...seatsData];
+                    for(var seat of seatDataClone) {
+                        for(var seatNumber of seat.seatNumberArrayList) {
+                            if (seatNumber.id === id) {
+                                seatNumber.status = 2;
+                            }
+                        }
+                    }
+                    console.log("before minus: " + seatChoosenNumber);
+                    setSeatChoosenNumber(seatChoosenNumber - 1);
+                    console.log("after minus: " + seatChoosenNumber)
+                    dispatch(changeSeatQuantity(seatChoosenNumber));
+                    setSeatsData(seatDataClone);
+                } else {
+                    alert("Ghế đã được bán")
+                }
+            }
+        }
+    }
+
     const Completionist = () => <span>You are good to go!</span>;
     
     const renderer = ({ minutes, seconds, completed }) => {
@@ -25,19 +79,27 @@ const PickSeat = (props) => {
         }   
     };
 
+
+    var data = '';
+
+    var config = {
+        method: 'get',
+        url: '/seats/status',
+        headers: { },
+        params: {
+            room_id: props.roomId,
+            premiere_id: props.premiereId
+        },
+        data : data
+    };
+
+    
     React.useEffect(() => {
-        axios.get("/seats/status", {params : {premiere_id: props.premiereId}}).then(function (response) {
-            setSeatOccupiedData(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        }); 
-        axios.get("/seats", {params : {room_id: props.roomId}}).then(function (response) {
-            
+        axios(config).then(function (response) {
             setSeatsData(response.data);
         }).catch(function (error) {
             console.log(error);
-        });
-        
+        });  
     }, []);
 
     return (
@@ -49,8 +111,10 @@ const PickSeat = (props) => {
                         <div className={styles.row} key={i}>
                             {seat.seatNumberArrayList.map((seatNumber) => (
                                 <div className={styles.seat} key={seatNumber.id}>
+                                <div className={`${seatNumber.status === 1 ? styles.sold : seatNumber.status === 0 ? styles.selected : seatNumber.status === 3 ? styles.self_selected : ''}`} key={seatNumber.id} onClick={() => handleChooseSeat(seatNumber.status, seatNumber.id)}>
                                     {seat.rows_alphabet + seatNumber.number}
                                 </div>
+                            </div>
                             ))}
                         </div>
                     ))}
@@ -58,7 +122,7 @@ const PickSeat = (props) => {
             </div>
             <div className={styles.right}>
                 <div className={styles.timer_text}>Thời gian của bạn còn: </div>
-                <Countdown date={Date.now() + 150000} renderer={renderer} />
+                <Countdown date={Date.now() + 150000} renderer={renderer} onComplete={handleTimeout}/>
             </div>
         </div>
     );

@@ -1,0 +1,53 @@
+
+.pick_seat_outer {
+    display: flex;
+    justify-content: space-around;
+    font-size: 16px;
+}
+
+.right {
+    display: flex;
+    font-size: 26px;
+    font-weight: bold;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer_text {
+    color: red;
+}
+
+.left {
+    background-color: grey;
+    width: 65%;
+}
+
+.header {
+    color: WHITE;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 2px solid white;
+    padding: 2px 0 2px 5px;
+}
+
+.film_name {
+    color: green;
+}
+
+.cinema {
+    color: red;
+}
+
+.left table td {
+    font-weight: bold;
+    padding: 0 10px 0 10px;
+}
+
+.note_text {
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+.cart_table_head {
+    color: green;
+}

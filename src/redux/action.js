@@ -11,3 +11,16 @@ export const changeVipTicketNumber = (number) => {
         payload: number
     }
 }
+
+export const changeSeatQuantity = (number) => {
+    return {
+        type: 'changeSeatQuantity',
+        payload: number
+    }
+}
+export const fillPremiereList = (premiereList) => {
+    return {
+        type: 'fillPremiereList',
+        payload: premiereList
+    }
+}

@@ -1,7 +1,14 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    useParams,
+  } from "react-router-dom";
 import DateCard from '../DateCard/DateCard';
 import FilmInfoCard from '../FilmInfoCard/FilmInfoCard';
 import './GetDetail.css'
+import { fillPremiereList } from '../../redux/action'
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 
 const dayListTmp = [];
@@ -26,12 +33,38 @@ for (let i = 1; i <= 14; i++) {
     }
     dayListTmp.push(dayObj);
 }
+
+    
+
 const GetDetail = () => {
+    var { id } = useParams();
+
+    const dispatch = useDispatch();
+
+    var data = '';
+
+    var config = {
+        method: 'get',
+        url: '/premiere/movie',
+        headers: { },
+        params: {
+            movie_id: id,
+            date: '2022-' + dayListTmp[0].month + "-" + dayListTmp[0].date
+        },
+        data : data
+    };
+
+    
+    React.useEffect(() => {
+        axios(config).then(function (response) {
+            dispatch(fillPremiereList(response.data));
+        }).catch(function (error) {
+            console.log(error);
+        });  
+    }, []);
+
     const [dayList, setDayList] = React.useState(dayListTmp);
-    const filmInfo = [
-        {cinemaName: "LC Hùng Vương", info: [{roomName: "Rạp 2D" , time: ["20:20"]}, {roomName: "Rạp Golden" , time: ["21:00"]}]},
-        {cinemaName: "LC Bà Triệu", info: [{roomName: "Rạp 2D" , time: ["20:00", "22:00"]}]}
-    ];
+    
     const setActive = (i) => {
         const dayListTmp2 = [...dayListTmp];
         for (let i = 0; i<=14; i++) {
@@ -39,7 +72,27 @@ const GetDetail = () => {
         }
         dayListTmp2[i].isActive = true;
         setDayList(dayListTmp2);
+        var data = '';
+
+        var config = {
+            method: 'get',
+            url: '/premiere/movie',
+            headers: { },
+            params: {
+                movie_id: id,
+                date: '2022-' + dayListTmp[i].month + "-" + dayListTmp[i].date
+            },
+            data : data
+        };
+
+        axios(config).then(function (response) {
+            dispatch(fillPremiereList(response.data));
+        }).catch(function (error) {
+            console.log(error);
+        });  
+        
     };
+
     return (
         <div className='Detail__container'>
             <div className='Detail__container-header'>
@@ -54,7 +107,7 @@ const GetDetail = () => {
                 <hr className='hr1'></hr>
             </div>
             <div className='place_container'>
-                <FilmInfoCard filmInfo={filmInfo}/>
+                <FilmInfoCard/>
             </div>
             
         </div>

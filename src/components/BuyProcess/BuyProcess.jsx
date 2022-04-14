@@ -8,6 +8,7 @@ import { ticketNumberSelector } from '../../redux/selectors'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
+import TicketConfirm from '../TicketConfirm/TicketConfirm';
 
 const { Step } = Steps;
 
@@ -47,7 +48,7 @@ const BuyProcess = () => {
     },
     {
       title: 'Xác nhận',
-      content: 'Last-content',
+      content: <TicketConfirm />,
     },
     {
       title: 'Đặt vé thành công',
@@ -92,7 +93,7 @@ const BuyProcess = () => {
             <div className="steps-action">
                 {current < steps.length - 1 && (
                 <Button type="primary" onClick={() => next()}>
-                    Next
+                    {current === 2 ? 'Confirm' : 'Next'}
                 </Button>
                 )}
                 {current === steps.length - 1 && (

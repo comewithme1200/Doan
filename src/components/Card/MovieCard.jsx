@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import styles from "./MovieCard.module.css";
 import { Link } from 'react-router-dom';
 
-const MovieCard = ({data: {movie_name, src}}) => {
+const MovieCard = ({data: {movie_name, id}}) => {
     return (
         <div className={styles.container}>
             <div className={styles.cardImage}>
@@ -13,7 +13,7 @@ const MovieCard = ({data: {movie_name, src}}) => {
                 <h4>{movie_name}</h4>
             </div>
             <div className={styles.cardAction}>
-                <Link to="/getDetail">
+                <Link to={`getDetail/${id}`}>
                     <button>MUA VÉ</button>
                 </Link>
             </div>

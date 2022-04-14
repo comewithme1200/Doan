@@ -2,11 +2,13 @@ const initialValue = {
     ticketNumber: { 
         standard : 0,
         vip: 0
-    }
+    },
+    seatQuantity: 0,
+    premiereList: []
 };
 
 const rootReducer = (state = initialValue, action) => {
-    console.log({state, action});
+    // console.log({state, action});
     switch (action.type){
         case 'changeStandardTicketNumber':
             return {
@@ -23,6 +25,16 @@ const rootReducer = (state = initialValue, action) => {
                     ...state.ticketNumber,
                     vip: action.payload
                 }
+            }
+        case "changeSeatQuantity":
+            return {
+                ...state,
+                seatQuantity: action.payload
+            }
+        case 'fillPremiereList':
+            return {
+                ...state,
+                premiereList: action.payload
             }
         default:
             return state;
