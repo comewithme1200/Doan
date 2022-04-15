@@ -1,12 +1,18 @@
 import React from 'react';
 import { QuantityPicker } from 'react-qty-picker';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { buyProcessObjSelector } from '../../redux/selectors'
 import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
+import axios from 'axios';
 import styles from "./PickTicket.module.css";
 
-const PickTicket = () => {
+const PickTicket = (props) => {
 
     const dispatch = useDispatch();
+    
+    const buyProcessObj = useSelector(buyProcessObjSelector);
+
+    var movieInfo = {};
 
     const data = [
         {
@@ -18,6 +24,25 @@ const PickTicket = () => {
             price: "100000",
         }
     ];
+
+    var config = {
+        method: 'get',
+        url: '/movies/getMovieInfo',
+        headers: { },
+        params: {
+            id: props.movie_id
+        }
+    };
+
+    
+    React.useEffect(() => {
+        axios(config).then(function (response) {
+            movieInfo = response.data;
+        }).catch(function (error) {
+            console.log(error);
+        });  
+    }, []);
+
 
     const [priceStandard, setPriceStandard] = React.useState(0);
     const [priceVIP, setPriceVIP] = React.useState(0);
@@ -37,8 +62,8 @@ const PickTicket = () => {
                 <div className={styles.pick_ticket_filmInfo}>
                     <img src='assets/midsoma.jpg'></img>
                     <div className={styles.pick_ticket_ticketInfo}>
-                        <div className={styles.pick_ticket_filmName}>MidSomar</div>
-                        <div className={styles.pick_ticket_preniereInfo}>Showing on 08-04-2022</div>
+                        <div className={styles.pick_ticket_filmName}>{buyProcessObj.movie_name}</div>
+                        <div className={styles.pick_ticket_preniereInfo}>Showing on {buyProcessObj.date}</div>
                     </div>
                 </div>
                 <div>

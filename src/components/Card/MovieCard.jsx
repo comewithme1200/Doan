@@ -13,7 +13,7 @@ const MovieCard = ({data: {movie_name, id}}) => {
                 <h4>{movie_name}</h4>
             </div>
             <div className={styles.cardAction}>
-                <Link to={`getDetail/${id}`}>
+                <Link to={`getDetail/${id}/${movie_name}`}>
                     <button>MUA VÉ</button>
                 </Link>
             </div>

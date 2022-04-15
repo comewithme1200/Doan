@@ -4,7 +4,11 @@ const initialValue = {
         vip: 0
     },
     seatQuantity: 0,
-    premiereList: []
+    premiereList: [],
+    buyProcessObj: {
+        movie_name: '',
+        date: ''
+    }
 };
 
 const rootReducer = (state = initialValue, action) => {
@@ -35,6 +39,11 @@ const rootReducer = (state = initialValue, action) => {
             return {
                 ...state,
                 premiereList: action.payload
+            }
+        case 'fillBuyProcessObj':
+            return {
+                ...state,
+                buyProcessObj: action.payload
             }
         default:
             return state;

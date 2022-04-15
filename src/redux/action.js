@@ -24,3 +24,10 @@ export const fillPremiereList = (premiereList) => {
         payload: premiereList
     }
 }
+
+export const fillBuyProcessObj = (buyProcessobj) => {
+    return {
+        type: 'fillBuyProcessObj',
+        payload: buyProcessobj
+    }
+}

@@ -16,10 +16,10 @@ const App = () => {
     <div>
       <Navbar />
       <Routes>
-        <Route path='/getDetail/:id' element={<GetDetail/>}/>
+        <Route path='/getDetail/:id/:movie_name' element={<GetDetail/>}/>
         <Route path='/' element={<MainContent/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/buyprocess' element={<BuyProcess/>}/>
+        <Route path='/buyprocess/:id' element={<BuyProcess/>}/>
       </Routes>
       <Footer />
     </div>

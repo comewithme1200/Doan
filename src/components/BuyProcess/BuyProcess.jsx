@@ -2,11 +2,14 @@ import React from 'react';
 import { Steps, Button, message, Card, Modal } from 'antd';
 import "./BuyProcess.css"
 import 'antd/dist/antd.css'
+import {
+  BrowserRouter as Router,
+  useParams,
+} from "react-router-dom";
 import PickTicket from '../PickTicket/PickTicket';
 import PickSeat from '../PickSeat/PickSeat';
 import { ticketNumberSelector } from '../../redux/selectors'
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
 import TicketConfirm from '../TicketConfirm/TicketConfirm';
 
@@ -19,6 +22,8 @@ const BuyProcess = () => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
   const dispatch = useDispatch();
+
+  var { id } = useParams();
 
   const ticketNumber = useSelector(ticketNumberSelector);
 
@@ -40,7 +45,7 @@ const BuyProcess = () => {
   const steps = [
     {
       title: 'Chọn vé',
-      content: <PickTicket />
+      content: <PickTicket movie_id={id}/>
     },
     {
       title: 'Chọn ghế',
@@ -61,6 +66,8 @@ const BuyProcess = () => {
       if (current === 0) {
         if (ticketNumber.standard + ticketNumber.vip > 0) {
           setCurrent(current + 1);
+
+          //không fix cứng nữa
           setRoomId('837175f7-1a06-4605-86ad-8bb4b3b6b0c3');
           setPremiereId('75a3c30e-5b00-41d6-bde0-9c3edde9ee9a');
         } else {

@@ -5,9 +5,10 @@ import {
   } from "react-router-dom";
 import DateCard from '../DateCard/DateCard';
 import FilmInfoCard from '../FilmInfoCard/FilmInfoCard';
-import './GetDetail.css'
+import './GetDetail.css';
+import { premiereListSelector } from '../../redux/selectors'
 import { fillPremiereList } from '../../redux/action'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 
@@ -37,10 +38,13 @@ for (let i = 1; i <= 14; i++) {
     
 
 const GetDetail = () => {
-    var { id } = useParams();
+    var { id, movie_name } = useParams();
 
     const dispatch = useDispatch();
 
+    var currentSelectedDate = '2022-' + dayListTmp[0].month + "-" + dayListTmp[0].date;
+
+    const premiereList = useSelector(premiereListSelector);
     var data = '';
 
     var config = {
@@ -71,6 +75,7 @@ const GetDetail = () => {
             dayListTmp2[i].isActive = false;
         }
         dayListTmp2[i].isActive = true;
+        currentSelectedDate = '2022-' + dayListTmp2[0].month + "-" + dayListTmp2[0].date
         setDayList(dayListTmp2);
         var data = '';
 
@@ -106,9 +111,17 @@ const GetDetail = () => {
                 </div>
                 <hr className='hr1'></hr>
             </div>
-            <div className='place_container'>
-                <FilmInfoCard/>
-            </div>
+            { premiereList.length !== 0 && (
+                <div className='place_container'>
+                    <FilmInfoCard movie_id={id} date={currentSelectedDate} movie_name={movie_name}/>
+                </div>
+            )}
+            { premiereList.length === 0 && (
+                <div className='not_found_premiere'>
+                    Hiện không có xuất chiếu phim vào ngày này
+                </div>
+            )}
+            
             
         </div>
     );

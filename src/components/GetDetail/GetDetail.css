@@ -49,3 +49,10 @@
 .place_container button:hover {
     cursor: pointer;
 }
+
+.not_found_premiere {
+    font-size: 24px;
+    font-weight: bold;
+    height: 25vh;
+    color: red;
+}

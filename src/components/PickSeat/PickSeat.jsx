@@ -10,7 +10,7 @@ import Countdown from 'react-countdown';
 const PickSeat = (props) => {
 
     const [seatsData, setSeatsData] = React.useState([]);
-    const [seatChoosenNumber, setSeatChoosenNumber] = React.useState(1);
+    const [seatChoosenNumber, setSeatChoosenNumber] = React.useState(0);
 
     const dispatch = useDispatch();
 
