@@ -12,9 +12,9 @@ export const changeVipTicketNumber = (number) => {
     }
 }
 
-export const changeSeatQuantity = (number) => {
+export const changeSeatChoosen = (number) => {
     return {
-        type: 'changeSeatQuantity',
+        type: 'changeSeatChoosen',
         payload: number
     }
 }
@@ -29,5 +29,12 @@ export const fillBuyProcessObj = (buyProcessobj) => {
     return {
         type: 'fillBuyProcessObj',
         payload: buyProcessobj
+    }
+}
+
+export const fillPremiereRoomInfo = (premiereRoomInfo) => {
+    return {
+        type: 'fillPremiereRoomInfo',
+        payload: premiereRoomInfo
     }
 }

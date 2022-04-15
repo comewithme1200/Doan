@@ -3,11 +3,18 @@ const initialValue = {
         standard : 0,
         vip: 0
     },
-    seatQuantity: 0,
+    seatChoosen: {
+        seatChoose: [],
+        seatNumber: 0
+    },
     premiereList: [],
     buyProcessObj: {
         movie_name: '',
         date: ''
+    },
+    premiereRoomInfo: {
+        room_id: '',
+        premiere_id: ''
     }
 };
 
@@ -30,10 +37,10 @@ const rootReducer = (state = initialValue, action) => {
                     vip: action.payload
                 }
             }
-        case "changeSeatQuantity":
+        case "changeSeatChoosen":
             return {
                 ...state,
-                seatQuantity: action.payload
+                seatChoosen: action.payload
             }
         case 'fillPremiereList':
             return {
@@ -44,6 +51,11 @@ const rootReducer = (state = initialValue, action) => {
             return {
                 ...state,
                 buyProcessObj: action.payload
+            }
+        case 'fillPremiereRoomInfo':
+            return {
+                ...state,
+                premiereRoomInfo: action.payload
             }
         default:
             return state;

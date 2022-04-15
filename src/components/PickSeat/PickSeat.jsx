@@ -3,58 +3,73 @@ import axios from 'axios';
 import styles from "./PickSeat.module.css";
 import { ticketNumberSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
-import { changeSeatQuantity } from '../../redux/action'
+import { changeSeatChoosen } from '../../redux/action'
 
 import Countdown from 'react-countdown';
 
+
+
+
 const PickSeat = (props) => {
 
+    
     const [seatsData, setSeatsData] = React.useState([]);
-    const [seatChoosenNumber, setSeatChoosenNumber] = React.useState(0);
+    // const [seatChoosen, setSeatChoosen] = React.useState([]);
 
     const dispatch = useDispatch();
 
     const ticketNumber = useSelector(ticketNumberSelector);
 
-    // console.log(ticketNumber);
+    var seatChoosenArray = React.useRef(new Array());
+    console.log(seatChoosenArray);
+
 
     const handleTimeout = () => {
 
     }
     
     const handleChooseSeat = (status, id) => {
-        console.log(seatChoosenNumber + " " + ticketNumber.standard + ticketNumber.vip);
-        if (seatChoosenNumber < ticketNumber.standard + ticketNumber.vip || status === 3) {
+        if (seatChoosenArray.current.length < ticketNumber.standard + ticketNumber.vip || status === 3) {
             if (status === 2) {
                 const seatDataClone = [...seatsData];
                 for(var seat of seatDataClone) {
                     for(var seatNumber of seat.seatNumberArrayList) {
                         if (seatNumber.id === id) {
                             seatNumber.status = 3;
+                            seatChoosenArray.current.push({
+                                seat_id: seatNumber.id,
+                                number: seatNumber.number,
+                                rows_alphabet: seat.rows_alphabet
+                            })
                         }
                     }
                 }
-                console.log("before add: " + seatChoosenNumber);
-                setSeatChoosenNumber(seatChoosenNumber + 1);
-                console.log("after add: " + seatChoosenNumber)
-                dispatch(changeSeatQuantity(seatChoosenNumber));
+                dispatch(changeSeatChoosen({
+                    seatChoose : seatChoosenArray.current,
+                    seatNumber: seatChoosenArray.current.length
+                }));
                 setSeatsData(seatDataClone);
             } else {
                 if (status === 0) {
                     alert("Ghế đang được người khác chọn")
                 } else if (status === 3){
                     const seatDataClone = [...seatsData];
+                    var seatNumberIdTmp;
                     for(var seat of seatDataClone) {
                         for(var seatNumber of seat.seatNumberArrayList) {
                             if (seatNumber.id === id) {
+                                seatNumberIdTmp = seatNumber.id;
                                 seatNumber.status = 2;
                             }
                         }
                     }
-                    console.log("before minus: " + seatChoosenNumber);
-                    setSeatChoosenNumber(seatChoosenNumber - 1);
-                    console.log("after minus: " + seatChoosenNumber)
-                    dispatch(changeSeatQuantity(seatChoosenNumber));
+                    seatChoosenArray.current = seatChoosenArray.current.filter(function(seatChoosen) {
+                        return seatChoosen.seat_id !== seatNumberIdTmp;
+                    });
+                    dispatch(changeSeatChoosen({
+                        seatChoose : seatChoosenArray.current,
+                        seatNumber: seatChoosenArray.current.length
+                    }));
                     setSeatsData(seatDataClone);
                 } else {
                     alert("Ghế đã được bán")

@@ -8,10 +8,11 @@ import {
 } from "react-router-dom";
 import PickTicket from '../PickTicket/PickTicket';
 import PickSeat from '../PickSeat/PickSeat';
-import { ticketNumberSelector } from '../../redux/selectors'
+import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
 import TicketConfirm from '../TicketConfirm/TicketConfirm';
+var axios = require('axios');
 
 const { Step } = Steps;
 
@@ -27,7 +28,9 @@ const BuyProcess = () => {
 
   const ticketNumber = useSelector(ticketNumberSelector);
 
-  console.log(ticketNumber);
+  const roomPremiereInfo = useSelector(premiereRoomInfoSelector);
+
+  const seatChoosen = useSelector(seatChoosenSelector);
 
 
   const showModal = () => {
@@ -61,17 +64,48 @@ const BuyProcess = () => {
     },
   ];
 
-
     const next = () => {
       if (current === 0) {
         if (ticketNumber.standard + ticketNumber.vip > 0) {
           setCurrent(current + 1);
-
-          //không fix cứng nữa
-          setRoomId('837175f7-1a06-4605-86ad-8bb4b3b6b0c3');
-          setPremiereId('75a3c30e-5b00-41d6-bde0-9c3edde9ee9a');
+          setRoomId(roomPremiereInfo.room_id);
+          setPremiereId(roomPremiereInfo.premiere_id);
         } else {
           alert("Chưa chọn vé");
+        }
+      } else if (current === 1) {
+        if (seatChoosen.seatNumber !== ticketNumber.standard + ticketNumber.vip) {
+            alert("Bạn chưa chọn hết ghế cho vé đã chọn");
+        } else {
+          var updateSeatOccupiedData = [];
+
+          for (const seatChoose of seatChoosen.seatChoose) {
+            updateSeatOccupiedData.push(
+              {
+                  seat_id: seatChoose.seat_id,
+                  premiere_id: roomPremiereInfo.premiere_id,
+                  status: ''
+              });
+          }
+          var data = JSON.stringify(updateSeatOccupiedData);
+          
+          var config = {
+            method: 'post',
+            url: '/seats',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          };
+          
+          axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          setCurrent(current + 1);
         }
       } else {
         setCurrent(current + 1);

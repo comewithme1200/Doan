@@ -26,8 +26,8 @@ const SaleCarousel = () => {
             </div>
             <div className='Sale__carousel'>
                 <Carousel breakPoints={breakPoints}>
-                    {saleList.map((movie) => (
-                        <Item src={movie.src}/>
+                    {saleList.map((movie, i) => (
+                        <Item src={movie.src} key={i}/>
                     ))}
                 </Carousel>
             </div>

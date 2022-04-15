@@ -9,40 +9,43 @@ import './GetDetail.css';
 import { premiereListSelector } from '../../redux/selectors'
 import { fillPremiereList, fillBuyProcessObj } from '../../redux/action'
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-
-
-const dayListTmp = [];
-const today = new Date();
-const weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-const dayObj = {
-    day: weekday[today.getDay()],
-    date: today.getDate(),
-    month: ((today.getMonth() + 1) < 10 ? '0' : '') + (today.getMonth() + 1),
-    isActive: true
-}
-dayListTmp.push(dayObj);
-
-for (let i = 1; i <= 14; i++) {
-    const nextDay = new Date();
-    nextDay.setDate(today.getDate() + i);
-    const dayObj = {
-        day: weekday[nextDay.getDay()],
-        date: nextDay.getDate(),
-        month: ((nextDay.getMonth() + 1) < 10 ? '0' : '') + (nextDay.getMonth() + 1),
-        isActive: false
-    }
-    dayListTmp.push(dayObj);
-}
-
-    
+import axios from 'axios';    
 
 const GetDetail = () => {
+    const dayListTmp = [];
+    const today = new Date();
+    const weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    const dayObj = {
+        day: weekday[today.getDay()],
+        date: today.getDate(),
+        month: ((today.getMonth() + 1) < 10 ? '0' : '') + (today.getMonth() + 1),
+        isActive: true
+    }
+    dayListTmp.push(dayObj);
+
+    for (let i = 1; i <= 14; i++) {
+        const nextDay = new Date();
+        nextDay.setDate(today.getDate() + i);
+        const dayObj = {
+            day: weekday[nextDay.getDay()],
+            date: nextDay.getDate(),
+            month: ((nextDay.getMonth() + 1) < 10 ? '0' : '') + (nextDay.getMonth() + 1),
+            isActive: false
+        }
+        dayListTmp.push(dayObj);
+    }
     var { id, movie_name } = useParams();
 
     const dispatch = useDispatch();
 
     var currentSelectedDate = '2022-' + dayListTmp[0].month + "-" + dayListTmp[0].date;
+    React.useEffect(() => {
+        dispatch(fillBuyProcessObj({
+            movie_name: movie_name,
+            date: currentSelectedDate
+        }));
+    }, []);
+    
 
     const premiereList = useSelector(premiereListSelector);
     var data = '';

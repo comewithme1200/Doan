@@ -25,6 +25,11 @@
     flex-direction: column;
 }
 
+.pick_ticket_filmName {
+    font-size: 28px;
+    color: red;
+}
+
 .pick_ticket_noteList{
     font-size: 16px;
 }
