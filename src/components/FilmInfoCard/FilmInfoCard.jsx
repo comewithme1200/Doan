@@ -4,7 +4,6 @@ import "./FilmInfoCard.css"
 
 import { useSelector, useDispatch } from 'react-redux';
 import { premiereListSelector } from '../../redux/selectors'
-import { fillBuyProcessObj } from '../../redux/action'
 
 const FilmInfoCard = (props) => {
 
@@ -14,12 +13,12 @@ const FilmInfoCard = (props) => {
 
     const dispatch = useDispatch();
 
-    const handleChoosePremiere = (id) => {
-        dispatch(fillBuyProcessObj({
-            movie_name: props.movie_name,
-            date: props.date
-        }));
-    }
+    // const handleChoosePremiere = () => {
+    //     dispatch(fillBuyProcessObj({
+    //         movie_name: props.movie_name,
+    //         date: props.date
+    //     }));
+    // }
 
     for (var premiere of filmListDateFilter) {
         for (var premiere1 of premiere.premiereResponseInfos) {
@@ -41,7 +40,7 @@ const FilmInfoCard = (props) => {
                             <div className='FilmInfoCard__roomName style'>{info.room_name}</div>
                             {info.premiereDtos.map((time, i) => (
                                 <Link to={`/buyprocess/${props.movie_id}`}>
-                                    <div className='FilmInfoCard__time style' key={time.id} onClick={() => handleChoosePremiere(time.id)}>{time.start_times} PM</div>
+                                    <div className='FilmInfoCard__time style' key={time.id}>{time.start_times} PM</div>
                                 </Link>
                             ))}
                         </div>

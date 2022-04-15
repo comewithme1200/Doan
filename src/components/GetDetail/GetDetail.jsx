@@ -7,7 +7,7 @@ import DateCard from '../DateCard/DateCard';
 import FilmInfoCard from '../FilmInfoCard/FilmInfoCard';
 import './GetDetail.css';
 import { premiereListSelector } from '../../redux/selectors'
-import { fillPremiereList } from '../../redux/action'
+import { fillPremiereList, fillBuyProcessObj } from '../../redux/action'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -75,7 +75,11 @@ const GetDetail = () => {
             dayListTmp2[i].isActive = false;
         }
         dayListTmp2[i].isActive = true;
-        currentSelectedDate = '2022-' + dayListTmp2[0].month + "-" + dayListTmp2[0].date
+        currentSelectedDate = '2022-' + dayListTmp2[i].month + "-" + dayListTmp2[i].date;
+        dispatch(fillBuyProcessObj({
+            movie_name: movie_name,
+            date: currentSelectedDate
+        }));
         setDayList(dayListTmp2);
         var data = '';
 
@@ -113,7 +117,7 @@ const GetDetail = () => {
             </div>
             { premiereList.length !== 0 && (
                 <div className='place_container'>
-                    <FilmInfoCard movie_id={id} date={currentSelectedDate} movie_name={movie_name}/>
+                    <FilmInfoCard movie_id={id}/>
                 </div>
             )}
             { premiereList.length === 0 && (

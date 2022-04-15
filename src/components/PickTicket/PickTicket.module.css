@@ -19,6 +19,8 @@
 }
 
 .pick_ticket_ticketInfo {
+    font-size: 24px;
+    font-weight: bold;
     display: flex;
     flex-direction: column;
 }
