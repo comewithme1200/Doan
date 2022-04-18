@@ -131,7 +131,6 @@ const BuyProcess = () => {
         dispatch(changeVipTicketNumber(0));
       } else if (current === 2) {
         var data = renderUpdateData();
-        console.log(data);
         var config = {
             method: 'delete',
             url: '/seats',
@@ -142,7 +141,7 @@ const BuyProcess = () => {
         };
         
         axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+            //console.log(JSON.stringify(response.data));
         }).catch(function (error) {
             console.log(error);
         });

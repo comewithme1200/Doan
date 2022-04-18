@@ -3,7 +3,7 @@ import styles from "./TicketConfirm.module.css";
 import Countdown from 'react-countdown';
 import { Navigate } from 'react-router'
 import { useSelector } from 'react-redux';
-import { premiereRoomInfoSelector, seatChoosenSelector } from '../../redux/selectors'
+import { premiereRoomInfoSelector, seatChoosenSelector, buyProcessObjSelector, ticketNumberSelector } from '../../redux/selectors'
 import axios from 'axios';
 
 const TicketConfirm = () => {
@@ -12,6 +12,10 @@ const TicketConfirm = () => {
     const premireInfo  = useSelector(premiereRoomInfoSelector);
 
     const seatChoosen = useSelector(seatChoosenSelector);
+
+    const buyProcessObj = useSelector(buyProcessObjSelector);
+
+    const ticketNumber = useSelector(ticketNumberSelector);
 
     const renderUpdateData = () => {
         var resultData = [];
@@ -25,6 +29,12 @@ const TicketConfirm = () => {
         }
         return resultData
     };
+    var seatDatasString = '';
+
+
+    for (const seatData of seatChoosen.seatChoose) {
+        seatDatasString += seatData.rows_alphabet + seatData.number + ", ";
+    }
 
     const renderer = ({ minutes, seconds, completed }) => {
         if (completed) {
@@ -44,7 +54,7 @@ const TicketConfirm = () => {
             }).catch(function (error) {
                 console.log(error);
             });
-              
+            dispatchEvent()
             return <Navigate to='/ChooseTicketTimeout' />
         } else {
             return (
@@ -63,7 +73,7 @@ const TicketConfirm = () => {
                     <tbody>
                         <tr className={styles.film_name}>
                             <td>PHIM:</td>
-                            <td>2</td>
+                            <td>{buyProcessObj.movie_name}</td>
                         </tr>
                         <tr className={styles.cinema}>
                             <td>RẠP:</td>
@@ -71,15 +81,15 @@ const TicketConfirm = () => {
                         </tr>
                         <tr>
                             <td>NGÀY:</td>
-                            <td>2</td>
+                            <td>{buyProcessObj.date}</td>
                         </tr>
                         <tr>
                             <td>SUẤT:</td>
-                            <td>2</td>
+                            <td>{premireInfo.time} / {premireInfo.room_name}</td>
                         </tr>
                         <tr>
                             <td>GHẾ:</td>
-                            <td>2</td>
+                            <td>{seatDatasString.substring(0, seatDatasString.length - 2)}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -95,9 +105,20 @@ const TicketConfirm = () => {
                     </thead>
                     <tbody>
                         {/* dynamic render ticket here */}
-                        <tr>
-                            
-                        </tr>
+                        {ticketNumber.standard !== 0 && (
+                            <tr>
+                                <td>Adult Standard 2D</td>
+                                <td>{90000 * ticketNumber.standard}</td>
+                                <td>{ticketNumber.standard}</td>
+                            </tr>    
+                        )}
+                        {ticketNumber.vip !== 0 && (
+                            <tr>
+                                <td>Adult VIP 2D</td>
+                                <td>{100000 * ticketNumber.standard}</td>
+                                <td>{ticketNumber.standard}</td>
+                            </tr>    
+                        )}
                     </tbody>
                 </table>
             </div>

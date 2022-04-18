@@ -1,16 +1,17 @@
 import React from 'react';
-import styles from './PickSeatContainer.module.css'
 import Countdown from 'react-countdown';
-import PickSeat from '../PickSeat/PickSeat';
 import { Navigate } from 'react-router'
 
+import styles from './PickSeatContainer.module.css'
+import PickSeat from '../PickSeat/PickSeat';
+
 const PickSeatContainer = (props) => {
-    
+
     const startDate = React.useRef(Date.now());
 
     const renderer = ({ minutes, seconds, completed }) => {
         if (completed) {
-            // Render a complete state
+            // reset number seat have been choosen before
             return <Navigate to='/ChooseTicketTimeout' />
         } else {
             // Render a countdown

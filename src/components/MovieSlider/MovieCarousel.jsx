@@ -7,7 +7,7 @@ import MovieCard from '../Card/MovieCard';
 const MovieCarousel = (props) => {
     const [toggleMovieList, setToggleMovieList] = React.useState(false);
     const breakPoints = [
-        { width: 1, itemsToShow: 2 },
+        { width: 1, itemsToShow: 1 },
         { width: 550, itemsToShow: 3 },
         { width: 768, itemsToShow: 4 },
         { width: 1200, itemsToShow: 6 },

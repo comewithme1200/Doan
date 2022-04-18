@@ -14,8 +14,6 @@ const PickSeat = (props) => {
 
     var seatChoosenArray = React.useRef(new Array());
 
-    console.log(seatChoosenArray);
-
     const handleChooseSeat = (status, id) => {
         if (seatChoosenArray.current.length < ticketNumber.standard + ticketNumber.vip || status === 3) {
             if (status === 2) {
