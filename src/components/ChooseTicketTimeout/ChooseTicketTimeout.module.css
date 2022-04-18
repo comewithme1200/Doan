@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 40vh;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.button {
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+    background-color: green; 
+    color: black;
+}
+
+.announcement {
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: red;
+}

@@ -9,6 +9,7 @@ import Login from './components/Login/Login';
 import { Routes, Route } from 'react-router-dom';
 import MainContent from './components/MainContent/MainContent';
 import BuyProcess from './components/BuyProcess/BuyProcess';
+import ChooseTicketTimeout from './components/ChooseTicketTimeout/ChooseTicketTimeout';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
     <div>
       <Navbar />
       <Routes>
+        <Route path='/ChooseTicketTimeout' element={<ChooseTicketTimeout/>}/>
         <Route path='/getDetail/:id/:movie_name' element={<GetDetail/>}/>
         <Route path='/' element={<MainContent/>}/>
         <Route path='/login' element={<Login/>}/>

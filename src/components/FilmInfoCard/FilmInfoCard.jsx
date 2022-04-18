@@ -14,10 +14,11 @@ const FilmInfoCard = (props) => {
 
     const dispatch = useDispatch();
 
-    const handleChoosePremiere = (room_id, premiere_id) => {
+    const handleChoosePremiere = (room_id, premiere_id, cinema_name) => {
         dispatch(fillPremiereRoomInfo({
             room_id: room_id,
-            premiere_id : premiere_id
+            premiere_id : premiere_id,
+            cinema_name: cinema_name
         }))
     }
 
@@ -41,7 +42,7 @@ const FilmInfoCard = (props) => {
                             <div className='FilmInfoCard__roomName style'>{premiereResponseInfo.room_name}</div>
                             {premiereResponseInfo.premiereDtos.map((time, i) => (
                                 <Link to={`/buyprocess/${props.movie_id}`}>
-                                    <div className='FilmInfoCard__time style' key={time.id} onClick={() => handleChoosePremiere(premiereResponseInfo.room_id, time.id)}>{time.start_times} PM</div>
+                                    <div className='FilmInfoCard__time style' key={time.id} onClick={() => handleChoosePremiere(premiereResponseInfo.room_id, time.id, prop.cinema_name)}>{time.start_times} PM</div>
                                 </Link>
                             ))}
                         </div>

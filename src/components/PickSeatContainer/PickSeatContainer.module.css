@@ -1,0 +1,25 @@
+.pick_seat_container_outer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.right {
+    display: flex;
+    font-size: 30px;
+    font-weight: bold;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer_text {
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+}

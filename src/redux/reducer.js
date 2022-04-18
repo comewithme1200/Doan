@@ -14,7 +14,8 @@ const initialValue = {
     },
     premiereRoomInfo: {
         room_id: '',
-        premiere_id: ''
+        premiere_id: '',
+        cinema_name: ''
     }
 };
 

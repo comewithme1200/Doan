@@ -1,17 +1,16 @@
 import React from 'react';
-import { Steps, Button, message, Card, Modal } from 'antd';
+import { Steps, Button, message, Modal } from 'antd';
 import "./BuyProcess.css"
 import 'antd/dist/antd.css'
 import {
-  BrowserRouter as Router,
   useParams,
 } from "react-router-dom";
 import PickTicket from '../PickTicket/PickTicket';
-import PickSeat from '../PickSeat/PickSeat';
 import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
 import TicketConfirm from '../TicketConfirm/TicketConfirm';
+import PickSeatContainer from '../PickSeatContainer/PickSeatContainer';
 var axios = require('axios');
 
 const { Step } = Steps;
@@ -32,6 +31,18 @@ const BuyProcess = () => {
 
   const seatChoosen = useSelector(seatChoosenSelector);
 
+  const renderUpdateData = () => {
+    var resultData = [];
+    for(var seat of seatChoosen.seatChoose) {
+        resultData.push({
+            seat_id : seat.seat_id,
+            premiere_id: roomPremiereInfo.premiere_id,
+            status: "",
+            disabled: ""
+        });
+    }
+    return resultData
+};
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -52,11 +63,11 @@ const BuyProcess = () => {
     },
     {
       title: 'Chọn ghế',
-      content: <PickSeat roomId={roomId} ticketNumber={ticketNumber} premiereId={premiereId}/>,
+      content: <PickSeatContainer roomId={roomId} ticketNumber={ticketNumber} premiereId={premiereId} />
     },
     {
       title: 'Xác nhận',
-      content: <TicketConfirm />,
+      content: <TicketConfirm/>,
     },
     {
       title: 'Đặt vé thành công',
@@ -118,6 +129,24 @@ const BuyProcess = () => {
         setCurrent(current - 1);
         dispatch(changeStandardTicketNumber(0));
         dispatch(changeVipTicketNumber(0));
+      } else if (current === 2) {
+        var data = renderUpdateData();
+        console.log(data);
+        var config = {
+            method: 'delete',
+            url: '/seats',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            data : data
+        };
+        
+        axios(config).then(function (response) {
+            console.log(JSON.stringify(response.data));
+        }).catch(function (error) {
+            console.log(error);
+        });
+        setCurrent(current - 1);
       } else {
         setCurrent(current - 1);
       }

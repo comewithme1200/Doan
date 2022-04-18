@@ -5,29 +5,17 @@ import { ticketNumberSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import { changeSeatChoosen } from '../../redux/action'
 
-import Countdown from 'react-countdown';
-
-
-
-
 const PickSeat = (props) => {
-
-    
     const [seatsData, setSeatsData] = React.useState([]);
-    // const [seatChoosen, setSeatChoosen] = React.useState([]);
 
     const dispatch = useDispatch();
 
     const ticketNumber = useSelector(ticketNumberSelector);
 
     var seatChoosenArray = React.useRef(new Array());
+
     console.log(seatChoosenArray);
 
-
-    const handleTimeout = () => {
-
-    }
-    
     const handleChooseSeat = (status, id) => {
         if (seatChoosenArray.current.length < ticketNumber.standard + ticketNumber.vip || status === 3) {
             if (status === 2) {
@@ -55,8 +43,8 @@ const PickSeat = (props) => {
                 } else if (status === 3){
                     const seatDataClone = [...seatsData];
                     var seatNumberIdTmp;
-                    for(var seat of seatDataClone) {
-                        for(var seatNumber of seat.seatNumberArrayList) {
+                    for(seat of seatDataClone) {
+                        for(seatNumber of seat.seatNumberArrayList) {
                             if (seatNumber.id === id) {
                                 seatNumberIdTmp = seatNumber.id;
                                 seatNumber.status = 2;
@@ -77,23 +65,6 @@ const PickSeat = (props) => {
             }
         }
     }
-
-    const Completionist = () => <span>You are good to go!</span>;
-    
-    const renderer = ({ minutes, seconds, completed }) => {
-        if (completed) {
-            // Render a complete state
-            return <Completionist />;
-        } else {
-            // Render a countdown
-            return (
-            <span>
-                {minutes}:{seconds}
-            </span>
-            );
-        }   
-    };
-
 
     var data = '';
 
@@ -134,10 +105,6 @@ const PickSeat = (props) => {
                         </div>
                     ))}
                 </div>
-            </div>
-            <div className={styles.right}>
-                <div className={styles.timer_text}>Thời gian của bạn còn: </div>
-                <Countdown date={Date.now() + 150000} renderer={renderer} onComplete={handleTimeout}/>
             </div>
         </div>
     );
