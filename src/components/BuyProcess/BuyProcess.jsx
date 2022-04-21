@@ -8,8 +8,8 @@ import {
 import PickTicket from '../PickTicket/PickTicket';
 import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
-import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
 import TicketConfirm from '../TicketConfirm/TicketConfirm';
+import Payment from '../Payment/Payment';
 import PickSeatContainer from '../PickSeatContainer/PickSeatContainer';
 var axios = require('axios');
 
@@ -70,8 +70,8 @@ const BuyProcess = () => {
       content: <TicketConfirm/>,
     },
     {
-      title: 'Đặt vé thành công',
-      content: 'Last-content',
+      title: 'Thanh Toán',
+      content: <Payment />,
     },
   ];
 
@@ -119,7 +119,7 @@ const BuyProcess = () => {
           setCurrent(current + 1);
         }
       } else {
-        setCurrent(current + 1);
+          setCurrent(current + 1);
       }
       
     };
@@ -127,8 +127,8 @@ const BuyProcess = () => {
     const prev = () => {
       if (current === 1) {
         setCurrent(current - 1);
-        dispatch(changeStandardTicketNumber(0));
-        dispatch(changeVipTicketNumber(0));
+        // dispatch(changeStandardTicketNumber(0));
+        // dispatch(changeVipTicketNumber(0));
       } else if (current === 2) {
         var data = renderUpdateData();
         var config = {

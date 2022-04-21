@@ -38,3 +38,10 @@ export const fillPremiereRoomInfo = (premiereRoomInfo) => {
         payload: premiereRoomInfo
     }
 }
+
+export const fillUserInfo = (userInfo) => {
+    return {
+        type: 'fillUserInfo',
+        payload: userInfo
+    }
+}

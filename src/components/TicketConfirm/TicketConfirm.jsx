@@ -115,8 +115,8 @@ const TicketConfirm = () => {
                         {ticketNumber.vip !== 0 && (
                             <tr>
                                 <td>Adult VIP 2D</td>
-                                <td>{100000 * ticketNumber.standard}</td>
-                                <td>{ticketNumber.standard}</td>
+                                <td>{100000 * ticketNumber.vip}</td>
+                                <td>{ticketNumber.vip}</td>
                             </tr>    
                         )}
                     </tbody>

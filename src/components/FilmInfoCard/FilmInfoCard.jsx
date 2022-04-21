@@ -3,25 +3,30 @@ import { Link } from 'react-router-dom';
 import "./FilmInfoCard.css"
 
 import { useSelector, useDispatch } from 'react-redux';
-import { premiereListSelector } from '../../redux/selectors'
+import { useNavigate  } from 'react-router-dom';
+import { premiereListSelector, userInfoSelector } from '../../redux/selectors'
 import { fillPremiereRoomInfo } from '../../redux/action'
 
 const FilmInfoCard = (props) => {
 
     const filmList = useSelector(premiereListSelector);
 
+    const userInfo = useSelector(userInfoSelector);
+
     const filmListDateFilter = [...filmList];
 
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+
     const handleChoosePremiere = (room_id, premiere_id, cinema_name, room_name, start_times) => {
-        dispatch(fillPremiereRoomInfo({
-            room_id: room_id,
-            premiere_id : premiere_id,
-            cinema_name: cinema_name,
-            room_name: room_name,
-            time: start_times
-        }))
+            dispatch(fillPremiereRoomInfo({
+                room_id: room_id,
+                premiere_id : premiere_id,
+                cinema_name: cinema_name,
+                room_name: room_name,
+                time: start_times
+            }))
     }
 
     for (var premiere of filmListDateFilter) {
@@ -43,7 +48,7 @@ const FilmInfoCard = (props) => {
                         <div key={i}>
                             <div className='FilmInfoCard__roomName style'>{premiereResponseInfo.room_name}</div>
                             {premiereResponseInfo.premiereDtos.map((time, i) => (
-                                <Link to={`/buyprocess/${props.movie_id}`}>
+                                <Link to={userInfo.token ? `/buyprocess/${props.movie_id}` : '/login'}>
                                     <div className='FilmInfoCard__time style' key={time.id} onClick={() => handleChoosePremiere(premiereResponseInfo.room_id, time.id, prop.cinema_name, premiereResponseInfo.room_name, time.start_times)}>{time.start_times} PM</div>
                                 </Link>
                             ))}

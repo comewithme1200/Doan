@@ -1,7 +1,7 @@
 import React from 'react';
 import { QuantityPicker } from 'react-qty-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { buyProcessObjSelector } from '../../redux/selectors'
+import { buyProcessObjSelector, ticketNumberSelector } from '../../redux/selectors'
 import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
 import axios from 'axios';
 import styles from "./PickTicket.module.css";
@@ -11,6 +11,8 @@ const PickTicket = (props) => {
     const dispatch = useDispatch();
     
     const buyProcessObj = useSelector(buyProcessObjSelector);
+
+    const ticketNumber = useSelector(ticketNumberSelector);
 
     var movieInfo = {};
 
@@ -105,13 +107,13 @@ const PickTicket = (props) => {
                         <tr>
                             <td>{data[0].name}</td>
                             <td>{data[0].price}</td>
-                            <td><QuantityPicker max={9} min={0} smooth width='6.7rem' onChange={getStandardPickerValue} /></td>
+                            <td><QuantityPicker max={9} min={0} value={ticketNumber.standard} smooth width='6.7rem' onChange={getStandardPickerValue} /></td>
                             <td>{priceStandard}</td>
                         </tr>
                         <tr>
                             <td>{data[1].name}</td>
                             <td>{data[1].price}</td>
-                            <td><QuantityPicker max={9} min={0} smooth width='6.7rem' onChange={getVIPPickerValue} /></td>
+                            <td><QuantityPicker max={9} min={0} value={ticketNumber.vip} smooth width='6.7rem' onChange={getVIPPickerValue} /></td>
                             <td>{priceVIP}</td>
                         </tr>
                     </tbody>

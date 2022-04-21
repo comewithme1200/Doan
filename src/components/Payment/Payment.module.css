@@ -1,0 +1,22 @@
+.container {
+    margin: 20px;
+}
+
+.note {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.payment {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.pay {
+    padding: 5px 20px 5px 20px;
+    background-color: lightblue;
+    font-weight: 300;
+    border-radius: 5px;
+}

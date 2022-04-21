@@ -18,6 +18,11 @@ const initialValue = {
         cinema_name: '',
         room_name: '',
         time: ''
+    },
+    userInfo: {
+        name: '',
+        level: '',
+        token: ''
     }
 };
 
@@ -59,6 +64,11 @@ const rootReducer = (state = initialValue, action) => {
             return {
                 ...state,
                 premiereRoomInfo: action.payload
+            }
+        case 'fillUserInfo':
+            return {
+                ...state,
+                userInfo: action.payload
             }
         default:
             return state;

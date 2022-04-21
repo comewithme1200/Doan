@@ -1,23 +1,43 @@
 import React from 'react';
 import styles from "./Login.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate  } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fillUserInfo } from '../../redux/action'
 import axios from 'axios';
 
 const Login = () => {
     const [loginStatus, setLoginStatus] = React.useState('');
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const handleLogin = (e) => {
+
         e.preventDefault();
+        if (!getData.password) {
+            alert("Chưa nhập mật khẩu");
+            return;
+        }
         const loginData = {
             email: getData.email,
             password: getData.password
         }
 
         axios.post('users/login', loginData).then(res => {
-            console.log(res.status);
+            navigate(-1);
+            dispatch(fillUserInfo({
+                name: res.data.user.name,
+                level: res.data.user.level,
+                token: res.data.token
+            }))
+            console.log(res.data);
             localStorage.setItem('token', res.data.token);
         }).catch(err => {
-            console.log(err);
+            if (err.response.data.message === 'invalid email or password') {
+                setLoginStatus(err.response.data.message);
+            }
+            console.log(err.response.data.errors);
         })
     };
 
@@ -29,8 +49,8 @@ const Login = () => {
                 <div className={styles.h3_container}>
                     <h1>Login</h1>
                 </div>
-                {loginStatus === 'error' && (
-                    <div className={styles.error}>*Sai thông tin đăng nhập</div>
+                {loginStatus && (
+                    <div className={styles.error}>*{loginStatus}</div>
                 )}
                 <div className='form-group'>
                     <label>Email</label>
