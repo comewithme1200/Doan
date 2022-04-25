@@ -27,6 +27,7 @@ const Login = () => {
         axios.post('users/login', loginData).then(res => {
             navigate(-1);
             dispatch(fillUserInfo({
+                user_id: res.data.user.id,
                 name: res.data.user.name,
                 level: res.data.user.level,
                 token: res.data.token

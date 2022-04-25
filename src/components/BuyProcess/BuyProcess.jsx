@@ -6,7 +6,7 @@ import {
   useParams,
 } from "react-router-dom";
 import PickTicket from '../PickTicket/PickTicket';
-import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector } from '../../redux/selectors'
+import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector, userInfoSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import TicketConfirm from '../TicketConfirm/TicketConfirm';
 import Payment from '../Payment/Payment';
@@ -30,6 +30,8 @@ const BuyProcess = () => {
   const roomPremiereInfo = useSelector(premiereRoomInfoSelector);
 
   const seatChoosen = useSelector(seatChoosenSelector);
+
+  const userInfo = useSelector(userInfoSelector);
 
   const renderUpdateData = () => {
     var resultData = [];
@@ -118,6 +120,36 @@ const BuyProcess = () => {
           });
           setCurrent(current + 1);
         }
+      } else if (current === 2) {
+        var seatList = [];
+        for(var seat of seatChoosen.seatChoose) {
+          seatList.push({
+              seat_id : seat.seat_id,
+              premiere_id: roomPremiereInfo.premiere_id,
+              price: 100000
+          });
+        } 
+        const data = {
+          user_id: userInfo.user_id,
+          invoiceDetailCreateParams: seatList
+        }
+        var config = {
+          method: 'post',
+          url: '/invoice',
+          headers: { 
+            'Content-Type': 'application/json'
+          },
+          data : data
+        };
+        
+        axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        setCurrent(current + 1);
       } else {
           setCurrent(current + 1);
       }
