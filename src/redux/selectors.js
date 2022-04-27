@@ -9,3 +9,5 @@ export const buyProcessObjSelector = (state) => state.buyProcessObj;
 export const premiereRoomInfoSelector = (state) => state.premiereRoomInfo;
 
 export const userInfoSelector = (state) => state.userInfo;
+
+export const invoiceInfoSelector = (state) => state.invoiceInfo;

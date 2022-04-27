@@ -45,3 +45,10 @@ export const fillUserInfo = (userInfo) => {
         payload: userInfo
     }
 }
+
+export const fillInvoiceInfo = (invoiceInfo) => {
+    return {
+        type: 'fillInvoiceInfo',
+        payload: invoiceInfo
+    }
+}

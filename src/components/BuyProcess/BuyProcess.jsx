@@ -6,9 +6,10 @@ import {
   useParams,
 } from "react-router-dom";
 import PickTicket from '../PickTicket/PickTicket';
-import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector, userInfoSelector } from '../../redux/selectors'
+import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector, userInfoSelector, invoiceInfoSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import TicketConfirm from '../TicketConfirm/TicketConfirm';
+import { fillInvoiceInfo } from '../../redux/action'
 import Payment from '../Payment/Payment';
 import PickSeatContainer from '../PickSeatContainer/PickSeatContainer';
 var axios = require('axios');
@@ -32,6 +33,8 @@ const BuyProcess = () => {
   const seatChoosen = useSelector(seatChoosenSelector);
 
   const userInfo = useSelector(userInfoSelector);
+
+  const invoiceInfo = useSelector(invoiceInfoSelector);
 
   const renderUpdateData = () => {
     var resultData = [];
@@ -144,6 +147,11 @@ const BuyProcess = () => {
         
         axios(config)
         .then(function (response) {
+          dispatch(fillInvoiceInfo({
+            invoiceId: response.data.invoice.id,
+            status: response.data.invoice.status,
+            user_id: response.data.invoice.user_id
+          }));
           console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
@@ -174,6 +182,22 @@ const BuyProcess = () => {
         
         axios(config).then(function (response) {
             //console.log(JSON.stringify(response.data));
+        }).catch(function (error) {
+            console.log(error);
+        });
+        setCurrent(current - 1);
+      } else if (current === 3) {
+        const data = invoiceInfo.invoiceId;
+        const config = {
+          method: 'delete',
+          url: '/invoice',
+          headers: { 
+              'Content-Type': 'application/json'
+          },
+          data : data
+        };
+        axios(config).then(function (response) {
+          console.log(JSON.stringify(response.data));
         }).catch(function (error) {
             console.log(error);
         });

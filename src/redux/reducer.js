@@ -23,6 +23,11 @@ const initialValue = {
         name: '',
         level: '',
         token: ''
+    },
+    invoiceInfo: {
+        invoiceId: '',
+        status: 0,
+        user_id: ''
     }
 };
 
@@ -70,6 +75,11 @@ const rootReducer = (state = initialValue, action) => {
                 ...state,
                 userInfo: action.payload
             }
+        case 'fillInvoiceInfo':
+            return {
+                ...state,
+                invoiceInfo: action.payload
+            }    
         default:
             return state;
 
