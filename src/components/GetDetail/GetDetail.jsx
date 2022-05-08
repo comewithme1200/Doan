@@ -92,7 +92,7 @@ const GetDetail = () => {
             headers: { },
             params: {
                 movie_id: id,
-                date: '2022-' + dayListTmp[i].month + "-" + dayListTmp[i].date
+                date: dayListTmp[i].date > 10 ? '2022-' + dayListTmp[i].month + "-" + dayListTmp[i].date : '2022-' + dayListTmp[i].month + "-0" + dayListTmp[i].date
             },
             data : data
         };
