@@ -11,3 +11,5 @@ export const premiereRoomInfoSelector = (state) => state.premiereRoomInfo;
 export const userInfoSelector = (state) => state.userInfo;
 
 export const invoiceInfoSelector = (state) => state.invoiceInfo;
+
+export const buyProcessStatusSelector = (state) => state.buyProcessStatus;

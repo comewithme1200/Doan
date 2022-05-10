@@ -4,7 +4,7 @@ import { MdOutlineRestaurantMenu } from 'react-icons/md';
 import images from '../../constants/images';
 import './Navbar.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { userInfoSelector } from '../../redux/selectors'
+import { userInfoSelector, buyProcessStatusSelector} from '../../redux/selectors'
 import { Link } from 'react-router-dom';
 import { fillUserInfo } from '../../redux/action';
 
@@ -12,6 +12,9 @@ const Navbar = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
 
   const userInfo = useSelector(userInfoSelector);
+
+  const buyProcessStatus = useSelector(buyProcessStatusSelector);
+
   const dispatch = useDispatch();
 
   console.log(userInfo);
@@ -40,14 +43,16 @@ const Navbar = () => {
       { !userInfo.token && (
       <div className="app__navbar-login">
           <Link to="/login">
-          <a href="#login" className="p__opensans">ĐĂNG NHẬP</a>
+            <a href="#login" className="p__opensans">ĐĂNG NHẬP</a>
           </Link>
       </div>
       )}
       { userInfo.token && (
           <div className='app__navbar-username-wrapper'>
             <div className='app__navbar-username'>{userInfo.name}</div>
-            <div className='app__navbar-logout' onClick={handleLogout}>Đăng xuất</div>
+            { buyProcessStatus === false && (
+              <div className='app__navbar-logout' onClick={handleLogout}>Đăng xuất</div>
+            )}  
           </div>
       )}
       <div className="app__navbar-smallscreen">

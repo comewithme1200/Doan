@@ -9,7 +9,7 @@ import PickTicket from '../PickTicket/PickTicket';
 import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector, userInfoSelector, invoiceInfoSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import TicketConfirm from '../TicketConfirm/TicketConfirm';
-import { fillInvoiceInfo } from '../../redux/action'
+import { fillInvoiceInfo, fillBuyProcessStatus } from '../../redux/action'
 import Payment from '../Payment/Payment';
 import PickSeatContainer from '../PickSeatContainer/PickSeatContainer';
 var axios = require('axios');
@@ -35,6 +35,10 @@ const BuyProcess = () => {
   const userInfo = useSelector(userInfoSelector);
 
   const invoiceInfo = useSelector(invoiceInfoSelector);
+
+  React.useEffect(() => {
+    dispatch(fillBuyProcessStatus(true));
+}, []);
 
   const renderUpdateData = () => {
     var resultData = [];
@@ -167,8 +171,6 @@ const BuyProcess = () => {
     const prev = () => {
       if (current === 1) {
         setCurrent(current - 1);
-        // dispatch(changeStandardTicketNumber(0));
-        // dispatch(changeVipTicketNumber(0));
       } else if (current === 2) {
         var data = renderUpdateData();
         var config = {
@@ -181,7 +183,6 @@ const BuyProcess = () => {
         };
         
         axios(config).then(function (response) {
-            //console.log(JSON.stringify(response.data));
         }).catch(function (error) {
             console.log(error);
         });

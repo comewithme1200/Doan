@@ -52,3 +52,10 @@ export const fillInvoiceInfo = (invoiceInfo) => {
         payload: invoiceInfo
     }
 }
+
+export const fillBuyProcessStatus = (status) => {
+    return {
+        type: 'fillBuyProcessStatus',
+        payload: status
+    }
+}

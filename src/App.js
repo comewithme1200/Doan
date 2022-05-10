@@ -9,22 +9,25 @@ import Login from './components/Login/Login';
 import { Routes, Route } from 'react-router-dom';
 import MainContent from './components/MainContent/MainContent';
 import BuyProcess from './components/BuyProcess/BuyProcess';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import ChooseTicketTimeout from './components/ChooseTicketTimeout/ChooseTicketTimeout';
 
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path='/ChooseTicketTimeout' element={<ChooseTicketTimeout/>}/>
-        <Route path='/getDetail/:id/:movie_name' element={<GetDetail/>}/>
-        <Route path='/' element={<MainContent/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/buyprocess/:id' element={<BuyProcess/>}/>
-      </Routes>
-      <Footer />
-    </div>
+    <PayPalScriptProvider options={{ "client-id" : "AWLQJeoptYF7fpQGxkMf_83KfTJorGBaC9DPoPaZeIb6u6wH_rZGcmiY2ZTpyepPrP_WLMRnv5Harvbx" }}>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path='/ChooseTicketTimeout' element={<ChooseTicketTimeout/>}/>
+          <Route path='/getDetail/:id/:movie_name' element={<GetDetail/>}/>
+          <Route path='/' element={<MainContent/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/buyprocess/:id' element={<BuyProcess/>}/>
+        </Routes>
+        <Footer />
+      </div>
+    </PayPalScriptProvider>
   )};
 
 export default App;

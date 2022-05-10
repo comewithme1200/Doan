@@ -28,11 +28,11 @@ const initialValue = {
         invoiceId: '',
         status: 0,
         user_id: ''
-    }
+    },
+    buyProcessStatus: false
 };
 
 const rootReducer = (state = initialValue, action) => {
-    // console.log({state, action});
     switch (action.type){
         case 'changeStandardTicketNumber':
             return {
@@ -80,6 +80,11 @@ const rootReducer = (state = initialValue, action) => {
                 ...state,
                 invoiceInfo: action.payload
             }    
+        case 'fillBuyProcessStatus':
+            return {
+                ...state,
+                buyProcessStatus: action.payload
+            } 
         default:
             return state;
 
