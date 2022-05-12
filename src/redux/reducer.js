@@ -29,7 +29,8 @@ const initialValue = {
         status: 0,
         user_id: ''
     },
-    buyProcessStatus: false
+    buyProcessStatus: false,
+    totalBill: 0
 };
 
 const rootReducer = (state = initialValue, action) => {
@@ -84,6 +85,11 @@ const rootReducer = (state = initialValue, action) => {
             return {
                 ...state,
                 buyProcessStatus: action.payload
+            } 
+        case 'fillTotalBill':
+            return {
+                ...state,
+                totalBill: action.payload
             } 
         default:
             return state;

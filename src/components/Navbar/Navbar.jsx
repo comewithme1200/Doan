@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userInfoSelector, buyProcessStatusSelector} from '../../redux/selectors'
 import { Link } from 'react-router-dom';
 import { fillUserInfo } from '../../redux/action';
+import UserDropdown from '../UserDropdown/UserDropdown';
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = React.useState(false);
@@ -49,10 +50,11 @@ const Navbar = () => {
       )}
       { userInfo.token && (
           <div className='app__navbar-username-wrapper'>
-            <div className='app__navbar-username'>{userInfo.name}</div>
+            {/* <div className='app__navbar-username'>{userInfo.name}</div>
             { buyProcessStatus === false && (
               <div className='app__navbar-logout' onClick={handleLogout}>Đăng xuất</div>
-            )}  
+            )}   */}
+            <UserDropdown />
           </div>
       )}
       <div className="app__navbar-smallscreen">

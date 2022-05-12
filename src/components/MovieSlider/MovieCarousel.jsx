@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Carousel from "react-elastic-carousel";
 import './MovieCarousel.css'
 import MovieCard from '../Card/MovieCard';
+import UserDropdown from '../UserDropdown/UserDropdown';
 
 
 const MovieCarousel = (props) => {

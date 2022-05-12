@@ -9,7 +9,7 @@ import PickTicket from '../PickTicket/PickTicket';
 import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector, userInfoSelector, invoiceInfoSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import TicketConfirm from '../TicketConfirm/TicketConfirm';
-import { fillInvoiceInfo, fillBuyProcessStatus } from '../../redux/action'
+import { fillInvoiceInfo, fillBuyProcessStatus, fillTotalBill } from '../../redux/action'
 import Payment from '../Payment/Payment';
 import PickSeatContainer from '../PickSeatContainer/PickSeatContainer';
 var axios = require('axios');
@@ -38,7 +38,7 @@ const BuyProcess = () => {
 
   React.useEffect(() => {
     dispatch(fillBuyProcessStatus(true));
-}, []);
+  }, []);
 
   const renderUpdateData = () => {
     var resultData = [];
@@ -50,8 +50,8 @@ const BuyProcess = () => {
             disabled: ""
         });
     }
-    return resultData
-};
+    return resultData;
+  };
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -90,6 +90,9 @@ const BuyProcess = () => {
           setCurrent(current + 1);
           setRoomId(roomPremiereInfo.room_id);
           setPremiereId(roomPremiereInfo.premiere_id);
+          const totalBill = ticketNumber.standard * 90000 + ticketNumber.vip * 100000;
+          console.log(totalBill);
+          dispatch(fillTotalBill(totalBill));
         } else {
           alert("Chưa chọn vé");
         }

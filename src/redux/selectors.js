@@ -13,3 +13,5 @@ export const userInfoSelector = (state) => state.userInfo;
 export const invoiceInfoSelector = (state) => state.invoiceInfo;
 
 export const buyProcessStatusSelector = (state) => state.buyProcessStatus;
+
+export const totalBillSelector = (state) => state.totalBill;

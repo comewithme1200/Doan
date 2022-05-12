@@ -1,17 +1,20 @@
 .container {
     margin: 20px;
+    padding: 5px;
 }
 
 .note {
     color: red;
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .payment {
-    display: flex;
-    flex-direction: column;
+    display: flex;  
     font-size: 18px;
+    margin-bottom: 10px;    
+    padding: 5px;
 }
 
 .pay {
@@ -19,4 +22,17 @@
     background-color: lightblue;
     font-weight: 300;
     border-radius: 5px;
+}
+
+.radio {
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.label {
+    font-size:18px;
+}
+
+.span {
+    margin-right: 15px;
 }

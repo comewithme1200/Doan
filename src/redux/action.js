@@ -59,3 +59,10 @@ export const fillBuyProcessStatus = (status) => {
         payload: status
     }
 }
+
+export const fillTotalBill = (totalBill) => {
+    return {
+        type: 'fillTotalBill',
+        payload: totalBill
+    }
+}
