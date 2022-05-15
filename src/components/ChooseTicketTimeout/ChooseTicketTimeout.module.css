@@ -6,6 +6,7 @@
     height: 40vh;
     font-size: 28px;
     font-weight: 500;
+    min-height: 620px;
 }
 
 .button {

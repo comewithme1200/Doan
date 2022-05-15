@@ -2,7 +2,8 @@ import React from 'react';
 import styles from "./Login.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate  } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fillUserInfo } from '../../redux/action'
 import axios from 'axios';
 
@@ -65,7 +66,10 @@ const Login = () => {
                 <div className={styles.button_container}>
                     <button className='btn btn-primary btn-block'>Đăng nhập</button>
                 </div>
-                
+                <div className={styles.signup}>
+                    <div className={styles.signup_text}>Bạn là người mới?</div>
+                    <div className={styles.signup_btn}><Link to='/register' style={{ textDecoration: 'none'}}>Tham gia ngay!!</Link></div>
+                </div>
             </form>
         </div>
     );

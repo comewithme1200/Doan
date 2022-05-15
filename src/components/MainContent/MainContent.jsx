@@ -2,8 +2,8 @@ import React from 'react';
 import Slider from '../Slider/Slider';
 import MovieCarousel from '../MovieSlider/MovieCarousel';
 import SaleCarousel from '../SaleSlider/SaleCarousel';
-import { fillBuyProcessStatus, changeSeatChoosen, changeVipTicketNumber, changeStandardTicketNumber} from '../../redux/action';
-import { seatChoosenSelector, invoiceInfoSelector, premiereRoomInfoSelector } from '../../redux/selectors'
+import { fillBuyProcessStatus, changeSeatChoosen, changeVipTicketNumber, changeStandardTicketNumber, changeIsPaid } from '../../redux/action';
+import { seatChoosenSelector, invoiceInfoSelector, premiereRoomInfoSelector, isPaidSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import { useStateIfMounted } from 'use-state-if-mounted'
 import axios from 'axios';
@@ -17,6 +17,8 @@ const MainContent = () => {
     const seatChoosen = useSelector(seatChoosenSelector);
 
     const roomPremiereInfo = useSelector(premiereRoomInfoSelector);
+
+    const isPaid = useSelector(isPaidSelector);
 
     const renderUpdateData = () => {
         var resultData = [];
@@ -40,7 +42,7 @@ const MainContent = () => {
         }).catch(err => {
             console.log(err);
         });
-        if (seatChoosen) {
+        if (seatChoosen && isPaid === false) {
             var data = renderUpdateData();
             var config = {
                 method: 'delete',
@@ -80,7 +82,8 @@ const MainContent = () => {
     
         dispatch(changeVipTicketNumber(0));
         dispatch(changeStandardTicketNumber(0));
-    }, []);
+        dispatch(changeIsPaid(false))
+    });
 
 
 

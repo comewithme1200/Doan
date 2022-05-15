@@ -1,12 +1,10 @@
 import React from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdOutlineRestaurantMenu } from 'react-icons/md';
-import images from '../../constants/images';
-import './Navbar.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { userInfoSelector, buyProcessStatusSelector} from '../../redux/selectors'
+import styles from './Navbar.module.css'
+import { useSelector } from 'react-redux';
+import { userInfoSelector } from '../../redux/selectors'
 import { Link } from 'react-router-dom';
-import { fillUserInfo } from '../../redux/action';
 import UserDropdown from '../UserDropdown/UserDropdown';
 
 const Navbar = () => {
@@ -14,55 +12,38 @@ const Navbar = () => {
 
   const userInfo = useSelector(userInfoSelector);
 
-  const buyProcessStatus = useSelector(buyProcessStatusSelector);
-
-  const dispatch = useDispatch();
-
   console.log(userInfo);
 
-  const handleLogout = () => {
-    dispatch(fillUserInfo({
-      name: '',
-      level: '',
-      token:''
-    }))
-  }
-
   return (
-    <nav className="app__navbar">
-      <div className="app__navbar-logo">
+    <nav className={styles.app__navbar}>
+      <div className={styles.app__navbar_logo}>
         <Link to="/">
-          <img src={images.gericht} alt="app__logo"/>
+          <img src="assets/logo.jpg" alt="app__logo"/>
+          <div className={styles.cinema_name}>LC Cinema</div>
         </Link>
       </div>
-      <ul className="app__navbar-links">
+      <ul className={styles.app__navbar_links}>
         <li className="p__opensans"><a href="#schedual">Lịch chiếu</a></li>
         <li className="p__opensans"><a href="#system">Hệ thống rạp</a></li>
         <li className="p__opensans"><a href="#sale">Khuyến mãi</a></li>
         <li className="p__opensans"><a href="#about">Về chúng tôi</a></li>
       </ul>
       { !userInfo.token && (
-      <div className="app__navbar-login">
+      <div className={styles.app__navbar_login}>
           <Link to="/login">
             <a href="#login" className="p__opensans">ĐĂNG NHẬP</a>
           </Link>
       </div>
       )}
       { userInfo.token && (
-          <div className='app__navbar-username-wrapper'>
-            {/* <div className='app__navbar-username'>{userInfo.name}</div>
-            { buyProcessStatus === false && (
-              <div className='app__navbar-logout' onClick={handleLogout}>Đăng xuất</div>
-            )}   */}
-            <UserDropdown />
-          </div>
+          <UserDropdown />
       )}
-      <div className="app__navbar-smallscreen">
+      <div className={styles.app__navbar_smallscreen}>
         <GiHamburgerMenu color="#fff" fontSize={27} onClick={() => setToggleMenu(true)} />
         {toggleMenu && (
-          <div className="app__navbar-smallscreen_overlay flex__center slide-bottom">
-            <MdOutlineRestaurantMenu fontSize={27} className="overlay__close" onClick={() => setToggleMenu(false)} />
-            <ul className="app__navbar-smallscreen_links">
+          <div className={styles.app__navbar_smallscreen_overlay}>
+            <MdOutlineRestaurantMenu fontSize={27} className={styles.overlay__close} onClick={() => setToggleMenu(false)} />
+            <ul className={styles.app__navbar_smallscreen_links}>
               <li className="p__opensans"><a href="#schedual" onClick={() => setToggleMenu(false)}>Lịch chiếu</a></li>
               <li className="p__opensans"><a href="#system" onClick={() => setToggleMenu(false)}>Hệ thống rạp</a></li>
               <li className="p__opensans"><a href="#sale" onClick={() => setToggleMenu(false)}>Khuyến mãi</a></li>

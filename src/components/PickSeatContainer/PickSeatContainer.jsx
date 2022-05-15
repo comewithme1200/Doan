@@ -16,7 +16,7 @@ const PickSeatContainer = (props) => {
         } else {
             // Render a countdown
             return (
-            <span>
+            <span>  
                 {minutes}:{seconds}
             </span>
             );

@@ -11,11 +11,29 @@ form {
     width: 60%;
     margin: 0 auto;
     align-items: center;
+    min-height: 620px;
 }
 
 .button_container {
     text-align: center;
     margin-top: 10px;
+}
+
+
+.signup {
+    text-align: center;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.signup_btn:hover {
+    text-decoration: underline;
+}
+
+.signup_text {
+    margin-right: 5px;
 }
 
 .h3_container {

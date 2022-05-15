@@ -1,5 +1,5 @@
 import React from 'react';
-import { Steps, Button, message, Modal } from 'antd';
+import { Steps, Button, message } from 'antd';
 import "./BuyProcess.css"
 import 'antd/dist/antd.css'
 import {
@@ -20,7 +20,6 @@ const BuyProcess = () => {
   const [current, setCurrent] = React.useState(0);
   const [roomId, setRoomId] = React.useState('');
   const [premiereId, setPremiereId] = React.useState('');
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -38,7 +37,7 @@ const BuyProcess = () => {
 
   React.useEffect(() => {
     dispatch(fillBuyProcessStatus(true));
-  }, []);
+  });
 
   const renderUpdateData = () => {
     var resultData = [];
@@ -51,18 +50,6 @@ const BuyProcess = () => {
         });
     }
     return resultData;
-  };
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
   };
 
   const steps = [
@@ -123,12 +110,13 @@ const BuyProcess = () => {
           
           axios(config)
           .then(function (response) {
-            console.log(JSON.stringify(response.data));
+              setCurrent(current + 1);
           })
           .catch(function (error) {
-            console.log(error);
+            console.log(error.response.data);
+            alert(error.response.data.message);
           });
-          setCurrent(current + 1);
+          
         }
       } else if (current === 2) {
         var seatList = [];
@@ -136,14 +124,14 @@ const BuyProcess = () => {
           seatList.push({
               seat_id : seat.seat_id,
               premiere_id: roomPremiereInfo.premiere_id,
-              price: 100000
+              price: seat.type === 'vip' ? 100000 : 90000
           });
         } 
         const data = {
           user_id: userInfo.user_id,
           invoiceDetailCreateParams: seatList
         }
-        var config = {
+        config = {
           method: 'post',
           url: '/invoice',
           headers: { 
@@ -222,23 +210,20 @@ const BuyProcess = () => {
             <div className="steps-action">
                 {current < steps.length - 1 && (
                 <Button type="primary" onClick={() => next()}>
-                    {current === 2 ? 'Confirm' : 'Next'}
+                    {current === 2 ? 'Chốt đơn!!!' : 'Tiếp theo'}
                 </Button>
                 )}
                 {current === steps.length - 1 && (
                 <Button type="primary" onClick={() => message.success('Processing complete!')}>
-                    Done
+                    Hoàn tất
                 </Button>
                 )}
                 {current > 0 && (
                 <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
-                    Previous
+                    Quay lại
                 </Button>
                 )}
             </div>
-            <Modal title="Alert" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-              
-            </Modal>
         </div> 
     );
 };

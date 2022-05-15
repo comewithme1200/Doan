@@ -19,6 +19,12 @@ const initialValue = {
         room_name: '',
         time: ''
     },
+    movieInfo: {
+        name: '',
+        image_path: '',
+        detail: '',
+        trailer_link: ''
+    },
     userInfo: {
         name: '',
         level: '',
@@ -30,7 +36,8 @@ const initialValue = {
         user_id: ''
     },
     buyProcessStatus: false,
-    totalBill: 0
+    totalBill: 0,
+    isPaid: false
 };
 
 const rootReducer = (state = initialValue, action) => {
@@ -91,6 +98,17 @@ const rootReducer = (state = initialValue, action) => {
                 ...state,
                 totalBill: action.payload
             } 
+        case 'fillMovieInfo':
+            return {
+                ...state,
+                movieInfo: action.payload
+            } 
+        case 'changeIsPaid':
+            return {
+                ...state,
+                isPaid: action.payload
+            } 
+            
         default:
             return state;
 

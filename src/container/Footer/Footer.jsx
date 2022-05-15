@@ -1,47 +1,34 @@
 import React from 'react';
-import { FiFacebook, FiTwitter, FiInstagram } from 'react-icons/fi';
-
-import { FooterOverlay } from '../../components';
-import { images } from '../../constants';
-import './Footer.css';
+import {SocialIcon} from 'react-social-icons';
+import styles from './Footer.module.css' 
 
 const Footer = () => (
-  <div className="app__footer section__padding" id="login">
-    <FooterOverlay />
-
-    <div className="app__footer-links">
-      <div className="app__footer-links_contact">
-        <h1 className="app__footer-headtext">Contact Us</h1>
-        <p className="p__opensans">9 W 53rd St, New York, NY 10019, USA</p>
-        <p className="p__opensans">+1 212-344-1230</p>
-        <p className="p__opensans">+1 212-555-1230</p>
-      </div>
-
-      <div className="app__footer-links_logo">
-        <img src={images.gericht} alt="footer_logo" />
-        <p className="p__opensans">&quot;The best way to find yourself is to lose yourself in the service of others.&quot;</p>
-        <img src={images.spoon} className="spoon__img" style={{ marginTop: 15 }} />
-        <div className="app__footer-links_icons">
-          <FiFacebook />
-          <FiTwitter />
-          <FiInstagram />
-        </div>
-      </div>
-
-      <div className="app__footer-links_work">
-        <h1 className="app__footer-headtext">Working Hours</h1>
-        <p className="p__opensans">Monday-Friday:</p>
-        <p className="p__opensans">08:00 am - 12:00 am</p>
-        <p className="p__opensans">Saturday-Sunday:</p>
-        <p className="p__opensans">07:00 am - 11:00 pm</p>
-      </div>
-    </div>
-
-    <div className="footer__copyright">
-      <p className="p__opensans">2021 Gericht. All Rights reserved.</p>
-    </div>
-
-  </div>
+  <footer className={styles.footer}>
+  	 <div className={styles.container}>
+  	 	<div className={styles.row}>
+  	 		<div className={styles.footer_col}>
+  	 			<h4>Về chúng tôi</h4>
+  	 			<ul style={{paddingLeft : 0}}>
+  	 				<li><a href='#'>về chúng tôi</a></li>
+  	 				<li><a href='#'>Dịch vụ</a></li>
+  	 			</ul>
+  	 		</div>
+  	 		<div className={styles.footer_col}>
+  	 			<h4>Trợ giúp</h4>
+  	 			<ul>
+  	 				<li><a href='#'>FAQ</a></li>
+  	 			</ul>
+  	 		</div>
+  	 		<div className={styles.footer_col}>
+  	 			<h4>Kết nối với chúng tôi</h4>
+  	 			<div className={styles.social_links}>
+            <SocialIcon url="https://www.facebook.com/vu.long.7169/" network={styles.facebook} style={{ height: 40, width: 40 }}/>
+            <SocialIcon url="https://www.linkedin.com/in/vũ-long-nguyễn-bb8a27221/"   style={{ height: 40, width: 40 }}/>
+  	 			</div>
+  	 		</div>
+  	 	</div>
+  	 </div>
+  </footer>
 );
 
 export default Footer;

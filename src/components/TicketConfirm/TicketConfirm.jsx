@@ -54,7 +54,6 @@ const TicketConfirm = () => {
             }).catch(function (error) {
                 console.log(error);
             });
-            dispatchEvent()
             return <Navigate to='/ChooseTicketTimeout' />
         } else {
             return (

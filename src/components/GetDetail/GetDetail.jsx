@@ -12,6 +12,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';    
 
 const GetDetail = () => {
+    React.useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     const dayListTmp = [];
     const today = new Date();
     const weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];

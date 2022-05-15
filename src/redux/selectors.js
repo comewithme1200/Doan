@@ -15,3 +15,7 @@ export const invoiceInfoSelector = (state) => state.invoiceInfo;
 export const buyProcessStatusSelector = (state) => state.buyProcessStatus;
 
 export const totalBillSelector = (state) => state.totalBill;
+
+export const movieInfoSelector = (state) => state.movieInfo;
+
+export const isPaidSelector = (state) => state.isPaid;

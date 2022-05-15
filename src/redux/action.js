@@ -66,3 +66,17 @@ export const fillTotalBill = (totalBill) => {
         payload: totalBill
     }
 }
+
+export const fillMovieInfo = (movieInfo) => {
+    return {
+        type: 'fillMovieInfo',
+        payload: movieInfo
+    }
+}
+
+export const changeIsPaid = (isPaid) => {
+    return {
+        type: 'changeIsPaid',
+        payload: isPaid
+    }
+}

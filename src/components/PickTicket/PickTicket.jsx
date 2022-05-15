@@ -1,12 +1,13 @@
 import React from 'react';
 import { QuantityPicker } from 'react-qty-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { buyProcessObjSelector, ticketNumberSelector } from '../../redux/selectors'
+import { buyProcessObjSelector, ticketNumberSelector, movieInfoSelector } from '../../redux/selectors'
 import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
-import axios from 'axios';
 import styles from "./PickTicket.module.css";
 
-const PickTicket = (props) => {
+const PickTicket = () => {
+
+    const base_image_path = '../assets/';
 
     const dispatch = useDispatch();
     
@@ -14,7 +15,7 @@ const PickTicket = (props) => {
 
     const ticketNumber = useSelector(ticketNumberSelector);
 
-    var movieInfo = {};
+    const movieInfo = useSelector(movieInfoSelector);
 
     const data = [
         {
@@ -27,34 +28,18 @@ const PickTicket = (props) => {
         }
     ];
 
-    var config = {
-        method: 'get',
-        url: '/movies/getMovieInfo',
-        headers: { },
-        params: {
-            id: props.movie_id
-        }
-    };
-
-    
-    React.useEffect(() => {
-        axios(config).then(function (response) {
-            movieInfo = response.data;
-        }).catch(function (error) {
-            console.log(error);
-        });  
-    }, []);
-
-
     const [priceStandard, setPriceStandard] = React.useState(0);
     const [priceVIP, setPriceVIP] = React.useState(0);
+    const [maximumTicket, setMaximumTicket] = React.useState(10);
 
     const getStandardPickerValue = (value) => {
+        //setMaximumTicket(maximumTicket - value);
         setPriceStandard(value * 90000);
         dispatch(changeStandardTicketNumber(value))
     }
 
     const getVIPPickerValue = (value) => {
+        //setMaximumTicket(maximumTicket - value);
         setPriceVIP(value * 100000);
         dispatch(changeVipTicketNumber(value))
     }
@@ -62,7 +47,7 @@ const PickTicket = (props) => {
         <div className={styles.pick_ticket_container}>
             <div className={styles.pick_ticket_filmInfo_container}>
                 <div className={styles.pick_ticket_filmInfo}>
-                    <img src='assets/midsoma.jpg'></img>
+                    <img src={base_image_path + movieInfo.image_path}></img> 
                     <div className={styles.pick_ticket_ticketInfo}>
                         <div className={styles.pick_ticket_filmName}>{buyProcessObj.movie_name}</div>
                         <div className={styles.pick_ticket_preniereInfo}>Showing on {buyProcessObj.date}</div>
@@ -107,13 +92,13 @@ const PickTicket = (props) => {
                         <tr>
                             <td>{data[0].name}</td>
                             <td>{data[0].price}</td>
-                            <td><QuantityPicker max={9} min={0} value={ticketNumber.standard} smooth width='6.7rem' onChange={getStandardPickerValue} /></td>
+                            <td><QuantityPicker max={10 - ticketNumber.vip} min={0} value={ticketNumber.standard} smooth width='6.7rem' onChange={getStandardPickerValue} /></td>
                             <td>{priceStandard}</td>
                         </tr>
                         <tr>
                             <td>{data[1].name}</td>
                             <td>{data[1].price}</td>
-                            <td><QuantityPicker max={9} min={0} value={ticketNumber.vip} smooth width='6.7rem' onChange={getVIPPickerValue} /></td>
+                            <td><QuantityPicker max={10 - ticketNumber.standard} min={0} value={ticketNumber.vip} smooth width='6.7rem' onChange={getVIPPickerValue} /></td>
                             <td>{priceVIP}</td>
                         </tr>
                     </tbody>

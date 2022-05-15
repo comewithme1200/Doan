@@ -1,37 +1,35 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Menu, Dropdown, Button } from 'antd';
-import { useSelector } from 'react-redux';
-import { userInfoSelector } from '../../redux/selectors'
+import { userInfoSelector } from '../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { fillUserInfo } from '../../redux/action';
+import { Link } from 'react-router-dom';
 
 const UserDropdown = () => {
 
     const userInfo = useSelector(userInfoSelector);
 
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+      dispatch(fillUserInfo({
+        name: '',
+        level: '',
+        token:''
+      }))
+    }
+
     const menu = (
-        <Menu
-          items={[
-            {
-              label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                  Lịch sử mua hàng
-                </a>
-              ),
-            },
-            {
-              label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-                  Đăng xuất
-                </a>
-              ),
-            }
-          ]}
-        />
-      );
+      <Menu>
+        <Menu.Item><Link to="/">Lịch sử</Link></Menu.Item>
+        <Menu.Item><a onClick={() => handleLogout()}>Đăng xuất</a></Menu.Item>
+      </Menu>
+    );
       
 
     return (
-        <Dropdown overlay={menu} placement="bottomLeft">
+        <Dropdown overlay={menu} placement="bottom">
             <Button>{userInfo.name}</Button>
         </Dropdown>
     );

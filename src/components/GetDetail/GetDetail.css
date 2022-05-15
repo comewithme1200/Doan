@@ -3,6 +3,7 @@
     background-color: #FDFCF0;
     flex-direction: column;
     padding: 20px 5px 20px 5px;
+    min-height: 620px;
 }
 .Detail__container-header {
     width: 99%;

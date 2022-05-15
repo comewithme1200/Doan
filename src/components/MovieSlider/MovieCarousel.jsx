@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Carousel from "react-elastic-carousel";
-import './MovieCarousel.css'
+import styles from './MovieCarousel.module.css'
 import MovieCard from '../Card/MovieCard';
-import UserDropdown from '../UserDropdown/UserDropdown';
 
 
 const MovieCarousel = (props) => {
@@ -16,24 +15,24 @@ const MovieCarousel = (props) => {
     const movieOnAir = props?.data?.moviesOnAir;
     const movieAboutToRelease = props?.data?.moviesAboutOnAir;
     return (
-        <div className='Movie__carousel-containter'>
-            <div className='Movie__carousel-header'>
+        <div className={styles.Movie__carousel_containter}>
+            <div className={styles.Movie__carousel_header}>
                 {!toggleMovieList && (
-                    <div className='Header-wrap'>
-                        <a className='highlight' onClick={() => setToggleMovieList(false)}>PHIM ĐANG CHIẾU</a>
+                    <div className={styles.Header_wrap}>
+                        <a className={styles.highlight} onClick={() => setToggleMovieList(false)}>PHIM ĐANG CHIẾU</a>
                         <a onClick={() => setToggleMovieList(true)}>PHIM SẮP CHIẾU</a>
                     </div>
                 )}
                 {toggleMovieList && (
-                    <div className='Header-wrap'>
+                    <div className={styles.Header_wrap}>
                         <a onClick={() => setToggleMovieList(false)}>PHIM ĐANG CHIẾU</a>
-                        <a className='highlight' onClick={() => setToggleMovieList(true)}>PHIM SẮP CHIẾU</a>
+                        <a className={styles.highlight} onClick={() => setToggleMovieList(true)}>PHIM SẮP CHIẾU</a>
                     </div>
                 )}
 
             </div>
             {!toggleMovieList ? (
-                <div className='Movie__carousel'>
+                <div className={styles.Movie__carousel}>
                     <Carousel breakPoints={breakPoints}>
                         {movieOnAir?.map((movie) => (
                             <MovieCard data={movie} key={movie.id} />
@@ -41,7 +40,7 @@ const MovieCarousel = (props) => {
                     </Carousel>
                 </div>
             ) : (
-                <div className='Movie__carousel'>
+                <div className={styles.Movie__carousel}>
                     <Carousel breakPoints={breakPoints}>
                         {movieAboutToRelease?.map((movie) => (
                             <MovieCard data={movie} key={movie.id} />

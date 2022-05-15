@@ -1,4 +1,4 @@
-.Movie__carousel-containter {
+.Movie__carousel_containter {
     display: flex;
     flex-direction: column;
     background-image: url('../../assets/movie-details-bg.jpg');
@@ -16,20 +16,20 @@
     height: 60vh; 
 }
 
-.Movie__carousel-header {
+.Movie__carousel_header {
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
 }
 
-.Movie__carousel-header a {
+.Movie__carousel_header a {
     margin: 0px 5px 0px 5px;
     font-size: 24px;
-    color: white;
+    text-decoration: none;
 }
 
-.Movie__carousel-header a:hover {
+.Movie__carousel_header a:hover {
     border-bottom: 1px solid gold;
     color: gold;
     cursor: pointer;
@@ -39,6 +39,6 @@
     border-bottom: 1px solid gold;
     color: gold;
 }
-.Header-wrap {
+.Header_wrap {
     margin-top: 50px;
 }
