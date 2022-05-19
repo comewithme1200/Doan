@@ -1,7 +1,7 @@
 import React from 'react';
 import { PayPalButtons } from '@paypal/react-paypal-js';
-import { totalBillSelector, seatChoosenSelector, premiereRoomInfoSelector, invoiceInfoSelector } from '../../redux/selectors';
-import { changeIsPaid } from '../../redux/action'
+import { totalBillSelector, seatChoosenSelector, premiereRoomInfoSelector, invoiceInfoSelector, buyProcessObjSelector } from '../../redux/selectors';
+import { changeIsPaid, fillTicketData } from '../../redux/action'
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router';
 var axios = require('axios');
@@ -17,6 +17,8 @@ const PaypalButton = () => {
     const roomPremiereInfo = useSelector(premiereRoomInfoSelector);
 
     const invoiceInfo = useSelector(invoiceInfoSelector);
+
+    const buyProcessObj = useSelector(buyProcessObjSelector);
 
     const products = {
         description : "Vé xem phim",
@@ -80,8 +82,24 @@ const PaypalButton = () => {
           .catch(function (error) {
             console.log(error);
           });
+        //render ticket data
+
+        var ticketData = [];
+        for (var seat of seatChoosen.seatChoose) {
+          ticketData.push({
+              cinema: roomPremiereInfo.cinema_name,
+              movie_name: buyProcessObj.movie_name,
+              date: buyProcessObj.date,
+              time: roomPremiereInfo.time,
+              room_name: roomPremiereInfo.room_name,
+              seat: seat.rows_alphabet + seat.number,
+              invoice_id: invoiceInfo.invoiceId
+          });
+        }  
+        dispatch(fillTicketData(ticketData));
+
         //redirect to success page what i need to do
-        return <Navigate to='/ChooseTicketTimeout' />
+        return <Navigate to='/OnlineInvoice' />
     }
 
     return (

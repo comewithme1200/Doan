@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+.invoiceCard_container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px 10px 30px;
+    width: 50%;
+    margin: 0 auto;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.right {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.download_container {
+    display: flex;
+    align-items: center;
+}
+
+.download_text {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 900px) {
+    .invoiceCard_container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .right {
+        align-items: center;
+    }
+}

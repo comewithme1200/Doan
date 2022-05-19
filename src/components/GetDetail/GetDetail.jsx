@@ -10,6 +10,7 @@ import { premiereListSelector } from '../../redux/selectors'
 import { fillPremiereList, fillBuyProcessObj } from '../../redux/action'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';    
+import FilmInfo from '../FilmInfoPage/FilmInfo';
 
 const GetDetail = () => {
     React.useEffect(() => {
@@ -110,6 +111,7 @@ const GetDetail = () => {
 
     return (
         <div className='Detail__container'>
+            <FilmInfo movie_id={id}/>
             <div className='Detail__container-header'>
                 <hr className='hr1'></hr>
                 <div className='Datecard_container'>

@@ -80,3 +80,11 @@ export const changeIsPaid = (isPaid) => {
         payload: isPaid
     }
 }
+
+export const fillTicketData = (ticketData) => {
+    return {
+        type: 'fillTicketData',
+        payload: ticketData
+    }
+}
+

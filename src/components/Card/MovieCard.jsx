@@ -21,10 +21,12 @@ const MovieCard = ({data: {movie_name, id, image_path, detail, trailer_link}}) =
     return (
         <div className={styles.container}>
             <div className={styles.cardImage}>
-                <img alt="Poster" src={base_url+image_path}/>
+                <Link to={`getDetail/${id}/${movie_name}`}>
+                    <img alt="Poster" src={base_url+image_path}/>
+                </Link>
             </div>
             <div className={styles.cardText}>
-                <h4>{movie_name}</h4>
+                <h4 style={{textDecoration: 'none'}}>{movie_name}</h4>
             </div>
             <div className={styles.cardAction}>
                 <Link to={`getDetail/${id}/${movie_name}`}>

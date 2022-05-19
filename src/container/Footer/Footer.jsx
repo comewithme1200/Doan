@@ -15,7 +15,7 @@ const Footer = () => (
   	 		</div>
   	 		<div className={styles.footer_col}>
   	 			<h4>Trợ giúp</h4>
-  	 			<ul>
+  	 			<ul style={{paddingLeft : 0}}>
   	 				<li><a href='#'>FAQ</a></li>
   	 			</ul>
   	 		</div>

@@ -49,7 +49,7 @@ const Login = () => {
         <div className={styles.login_container}>
             <form onSubmit={handleLogin}>
                 <div className={styles.h3_container}>
-                    <h1>Login</h1>
+                    <h1>Đăng nhập</h1>
                 </div>
                 {loginStatus && (
                     <div className={styles.error}>*{loginStatus}</div>

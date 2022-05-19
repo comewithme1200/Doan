@@ -19,3 +19,6 @@ export const totalBillSelector = (state) => state.totalBill;
 export const movieInfoSelector = (state) => state.movieInfo;
 
 export const isPaidSelector = (state) => state.isPaid;
+
+export const ticketDataSelector = (state) => state.ticketData;
+

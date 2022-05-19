@@ -148,7 +148,7 @@ const PickSeat = (props) => {
         }).catch(function (error) {
             console.log(error);
         });  
-    });
+    }, []);
 
     return (
         <div className={styles.pick_seat_outer}>

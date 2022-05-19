@@ -37,7 +37,7 @@ const BuyProcess = () => {
 
   React.useEffect(() => {
     dispatch(fillBuyProcessStatus(true));
-  });
+  }, []);
 
   const renderUpdateData = () => {
     var resultData = [];

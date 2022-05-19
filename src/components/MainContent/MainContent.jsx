@@ -20,29 +20,28 @@ const MainContent = () => {
 
     const isPaid = useSelector(isPaidSelector);
 
-    const renderUpdateData = () => {
-        var resultData = [];
-        console.log(seatChoosen);
-        if (seatChoosen) {
-            for(var seat of seatChoosen.seatChoose) {
-                resultData.push({
-                    seat_id : seat.seat_id,
-                    premiere_id: roomPremiereInfo.premiere_id,
-                    status: "",
-                    disabled: ""
-                });
-            }
-        }
-        return resultData;
-    };
-
     React.useEffect(() => {
+        console.log("render");
         axios.get('/movies').then( res => {
             setMainContentMoviesData(res.data);
         }).catch(err => {
             console.log(err);
         });
-        if (seatChoosen && isPaid === false) {
+        const renderUpdateData = () => {
+            var resultData = [];
+            if (seatChoosen) {
+                for(var seat of seatChoosen.seatChoose) {
+                    resultData.push({
+                        seat_id : seat.seat_id,
+                        premiere_id: roomPremiereInfo.premiere_id,
+                        status: "",
+                        disabled: ""
+                    });
+                }
+            }
+            return resultData;
+        };
+        if (seatChoosen.length !== 0 && isPaid === false) {
             var data = renderUpdateData();
             var config = {
                 method: 'delete',
@@ -58,7 +57,7 @@ const MainContent = () => {
                 console.log(error);
             });
         }
-        if (invoiceInfo) {
+        if (invoiceInfo.invoiceId !== "" && isPaid === false) {
             const data = invoiceInfo.invoiceId;
             const config = {
             method: 'delete',
@@ -69,7 +68,7 @@ const MainContent = () => {
             data : data
             };
             axios(config).then(function (response) {
-            console.log(JSON.stringify(response.data));
+                console.log(JSON.stringify(response.data));
             }).catch(function (error) {
                 console.log(error);
             });
@@ -83,7 +82,7 @@ const MainContent = () => {
         dispatch(changeVipTicketNumber(0));
         dispatch(changeStandardTicketNumber(0));
         dispatch(changeIsPaid(false))
-    });
+    }, []);
 
 
 

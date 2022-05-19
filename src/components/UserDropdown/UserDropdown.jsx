@@ -17,12 +17,13 @@ const UserDropdown = () => {
         name: '',
         level: '',
         token:''
-      }))
+      }));
+      localStorage.removeItem('token');
     }
 
     const menu = (
       <Menu>
-        <Menu.Item><Link to="/">Lịch sử</Link></Menu.Item>
+        <Menu.Item><Link to="/buyHistory">Lịch sử</Link></Menu.Item>
         <Menu.Item><a onClick={() => handleLogout()}>Đăng xuất</a></Menu.Item>
       </Menu>
     );

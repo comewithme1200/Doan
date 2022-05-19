@@ -29,12 +29,18 @@ const FilmInfoCard = (props) => {
             }))
     }
 
+    var AMorPM = '';
+
     for (var premiere of filmListDateFilter) {
         for (var premiere1 of premiere.premiereResponseInfos) {
             for (var dtos of premiere1.premiereDtos) {
                 const date = new Date(dtos.start_times);
-                const hoursAndMinutes = date.getHours() + ':' + date.getMinutes();
-                dtos.start_times = hoursAndMinutes
+                AMorPM = date.getHours() > 12 ? 'PM' : 'AM';
+                const hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+                const min = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+                const hoursAndMinutes = hour + ':' + min;
+                dtos.start_times = hoursAndMinutes;
+                dtos.AMorPM = AMorPM;
             }
         }
     }
@@ -49,7 +55,7 @@ const FilmInfoCard = (props) => {
                             <div className='FilmInfoCard__roomName style'>{premiereResponseInfo.room_name}</div>
                             {premiereResponseInfo.premiereDtos.map((time, i) => (
                                 <Link to={userInfo.token ? `/buyprocess/${props.movie_id}` : '/login'}>
-                                    <div className='FilmInfoCard__time style' key={time.id} onClick={() => handleChoosePremiere(premiereResponseInfo.room_id, time.id, prop.cinema_name, premiereResponseInfo.room_name, time.start_times)}>{time.start_times} PM</div>
+                                    <div className='FilmInfoCard__time style' key={time.id} onClick={() => handleChoosePremiere(premiereResponseInfo.room_id, time.id, prop.cinema_name, premiereResponseInfo.room_name, time.start_times)}>{time.start_times} {time.AMorPM}</div>
                                 </Link>
                             ))}
                         </div>

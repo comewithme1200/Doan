@@ -11,6 +11,9 @@ import MainContent from './components/MainContent/MainContent';
 import BuyProcess from './components/BuyProcess/BuyProcess';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import ChooseTicketTimeout from './components/ChooseTicketTimeout/ChooseTicketTimeout';
+import SignUp from './components/SignUp/SignUp';
+import OnlineInvoice from './components/OnlineInvoice/OnlineInvoice';
+import BuyHistory from './components/BuyHistory/BuyHistory';
 
 
 const App = () => {
@@ -20,10 +23,13 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path='/ChooseTicketTimeout' element={<ChooseTicketTimeout/>}/>
+          <Route path='/OnlineInvoice' element={<OnlineInvoice/>}/>
           <Route path='/getDetail/:id/:movie_name' element={<GetDetail/>}/>
           <Route path='/' element={<MainContent/>}/>
           <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<SignUp/>}/>
           <Route path='/buyprocess/:id' element={<BuyProcess/>}/>
+          <Route path='/buyHistory' element={<BuyHistory/>}/>
         </Routes>
         <Footer />
       </div>
