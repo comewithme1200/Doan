@@ -10,6 +10,22 @@
     margin-bottom: 5px;
 }
 
+.container_disable {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 5px;
+}
+
+.container_disable:hover {
+    cursor: not-allowed;
+}
+
+
 .container:hover {
     cursor: pointer;
     background-color: aqua;
@@ -36,6 +52,9 @@
     }
 
     .movie_container {
+        flex-direction: column;
+    }
+    .container_disable {
         flex-direction: column;
     }
 }

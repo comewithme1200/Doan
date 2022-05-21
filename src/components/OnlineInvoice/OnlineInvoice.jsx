@@ -1,14 +1,47 @@
 import React from 'react';
 import styles from './OnlineInvoice.module.css';
 import { useSelector } from 'react-redux';
-import { ticketDataSelector } from '../../redux/selectors'
+import { ticketDataSelector, userInfoSelector } from '../../redux/selectors';
+import { useParams } from "react-router-dom";
 import InvoiceCard from '../InvoiceCard/InvoiceCard';
+var axios = require('axios');
 
 const OnlineInvoice = () => {
 
-    const ticketData  = useSelector(ticketDataSelector);
+    const [ticketData, setTicketData] = React.useState(new Array());
 
-    console.log(ticketData);
+    const ticketList = useSelector(ticketDataSelector);
+
+    const userInfo = useSelector(userInfoSelector);
+
+    var { invoice_id } = useParams();
+
+    React.useEffect(() => {
+        setTicketData(ticketList);
+        if (ticketData.length === 0) {
+            var data = '';
+
+            var config = {
+            method: 'get',
+            url: '/invoice/getTicket?invoice_id=' + invoice_id,
+            headers: { 
+                'Authorization': 'Bearer ' +  userInfo.token
+            },
+            data : data
+            };
+
+            axios(config)
+            .then(function (response) {
+                setTicketData(response.data);
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, []);
+    
+    // console.log(ticketData);
 
     return (
         <div className={styles.container}>

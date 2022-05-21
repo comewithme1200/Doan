@@ -1,9 +1,14 @@
 import React from 'react';
 import YoutubeFrame from '../YoutubeFrame/YoutubeFrame';
 import styles from './FilmInfo.module.css'
+import useWindowDimensions from '../../CustomHook/useWindowDimensions'
 var axios = require('axios');
 
 const FilmInfo = (props) => {
+
+    const { height, width } = useWindowDimensions();
+
+    console.log(height + " " + width);
 
     console.log(props.movie_id);
 
@@ -44,8 +49,14 @@ const FilmInfo = (props) => {
                         <td>{movieInfo.time} phút</td>
                     </tr>
                 </table>
-                {movieInfo.trailer_link !== '' && (
-                    <YoutubeFrame embedId={movieInfo.trailer_link} />
+                {movieInfo.trailer_link !== '' && width > 900 && (
+                    <YoutubeFrame embedId={movieInfo.trailer_link} width="520" height="345"/>
+                )}
+                {movieInfo.trailer_link !== '' && width < 900 && width > 500 && (
+                    <YoutubeFrame embedId={movieInfo.trailer_link} width="420" height="245" />
+                )}
+                {movieInfo.trailer_link !== '' && width < 500 && (
+                    <YoutubeFrame embedId={movieInfo.trailer_link} width="320" height="245" />
                 )}
             </div>
         </div>

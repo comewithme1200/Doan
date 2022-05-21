@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './HistoryCard.module.css';
 
 const HistoryCard = (props) => {
-    console.log(props);
+    var ts = new Date(props.props.created_date);
 
-    var ts = new Date(1652938198000);
+    const now = new Date().getTime();
 
     return (
-        <div className={styles.container}>
+        <div className={`${props.props.premiere_end_time > now ? styles.container : styles.container_disable}`}>
             <div className={styles.movie_container}>
                 <img src={"assets/" + props.props.image_path}/>
                 <div className={styles.movie_name}>{props.props.movie_name}</div>

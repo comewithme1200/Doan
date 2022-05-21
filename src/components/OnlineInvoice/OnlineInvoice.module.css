@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 .container {
-    min-height: 585px;
+    min-height: 70vh;
     background-color: lightgreen;
     padding: 20px 0 20px 0;
     font-family: 'Poppins', sans-serif;

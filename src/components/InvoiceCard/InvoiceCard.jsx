@@ -9,11 +9,24 @@ import {
 
 const InvoiceCard = (props) => {
 
+    console.log(props);
+
     const componentRef = React.createRef();
     
     const download = () => {
         exportComponentAsJPEG(componentRef)
     }
+
+    const day = new Date(props.ticketInfo.start_time);
+
+    console.log(day.getHours());
+
+    const formated_time = day.getMinutes() > 9 ? day.getMinutes() : "0" + day.getMinutes();
+
+    const formated_hour =  day.getHours() > 9 ? day.getHours() : "0" + day.getHours();
+
+    const date = props.ticketInfo.date ? props.ticketInfo.date : day.toLocaleDateString();
+    const time = props.ticketInfo.time ? props.ticketInfo.date : formated_hour + ":" + formated_time;
 
     return (
         <div className={styles.invoiceCard_container} ref={componentRef}>
@@ -30,7 +43,7 @@ const InvoiceCard = (props) => {
                         </tr>
                         <tr>
                             <td>SUẤT:</td>
-                            <td>{props.ticketInfo.date + " " + props.ticketInfo.time + " / " + props.ticketInfo.room_name}</td>
+                            <td>{date + " " + time + " / " + props.ticketInfo.room_name}</td>
                         </tr>
                         <tr>
                             <td>GHẾ:</td>

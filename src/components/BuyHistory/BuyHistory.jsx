@@ -3,6 +3,7 @@ import styles from './BuyHistory.module.css';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from '../../redux/selectors';
 import HistoryCard from '../HistoryCard/HistoryCard';
+import { Link } from 'react-router-dom';
 var axios = require('axios');
 
 const BuyHistory = () => {
@@ -13,9 +14,7 @@ const BuyHistory = () => {
 
     const token = userInfo.token ? userInfo.token : localStorage.getItem('token');
 
-
     const TOKEN = 'Bearer ' + token;
-    console.log(TOKEN);
 
     React.useEffect(() => {
         var config = {
@@ -34,6 +33,10 @@ const BuyHistory = () => {
                 console.log(error);
             });
     }, []);
+
+    const handleGetInvoiceDetail = (invoice_id) => {
+        console.log(invoice_id);
+    }
     
 
     return (
@@ -42,8 +45,10 @@ const BuyHistory = () => {
                 Lịch sử mua vé
             </div>
             <hr className={styles.hr} />
-            {buyHistory?.map((history, key = history.invoice_id) => (
-                <HistoryCard props={history}/>
+            {buyHistory?.map((history) => (
+                <Link to={`/OnlineInvoice/${history.invoice_id}`}>
+                    <HistoryCard props={history} key={history.invoice_id}/>
+                </Link>
             ))}
         </div>
     );

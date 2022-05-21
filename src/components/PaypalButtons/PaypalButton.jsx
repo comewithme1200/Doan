@@ -99,7 +99,7 @@ const PaypalButton = () => {
         dispatch(fillTicketData(ticketData));
 
         //redirect to success page what i need to do
-        return <Navigate to='/OnlineInvoice' />
+        return <Navigate to={`/OnlineInvoice/${invoiceInfo.invoiceId}`} />
     }
 
     return (

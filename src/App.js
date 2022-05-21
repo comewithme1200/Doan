@@ -23,7 +23,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path='/ChooseTicketTimeout' element={<ChooseTicketTimeout/>}/>
-          <Route path='/OnlineInvoice' element={<OnlineInvoice/>}/>
+          <Route path='/OnlineInvoice/:invoice_id' element={<OnlineInvoice/>}/>
           <Route path='/getDetail/:id/:movie_name' element={<GetDetail/>}/>
           <Route path='/' element={<MainContent/>}/>
           <Route path='/login' element={<Login/>}/>
