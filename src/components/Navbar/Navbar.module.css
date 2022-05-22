@@ -24,6 +24,11 @@
     height: 60px;
 }
 
+.app__navbar_logo img {
+    height: 100px;
+    width: 100px;
+}
+
 .app__navbar_links {
     flex: 1;
     display: flex;

@@ -50,8 +50,7 @@ const Navbar = () => {
     <nav className={styles.app__navbar}>
       <div className={styles.app__navbar_logo}>
         <Link to="/">
-          <img src="assets/logo.jpg" alt="app__logo"/>
-          <div className={styles.cinema_name}>LC Cinema</div>
+          <img src="assets/logo.png" alt="app__logo"/>
         </Link>
       </div>
       <ul className={styles.app__navbar_links}>
