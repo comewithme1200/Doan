@@ -30,16 +30,13 @@ const PickTicket = () => {
 
     const [priceStandard, setPriceStandard] = React.useState(0);
     const [priceVIP, setPriceVIP] = React.useState(0);
-    const [maximumTicket, setMaximumTicket] = React.useState(10);
 
     const getStandardPickerValue = (value) => {
-        //setMaximumTicket(maximumTicket - value);
         setPriceStandard(value * 90000);
         dispatch(changeStandardTicketNumber(value))
     }
 
     const getVIPPickerValue = (value) => {
-        //setMaximumTicket(maximumTicket - value);
         setPriceVIP(value * 100000);
         dispatch(changeVipTicketNumber(value))
     }
@@ -92,13 +89,13 @@ const PickTicket = () => {
                         <tr>
                             <td>{data[0].name}</td>
                             <td>{data[0].price}</td>
-                            <td><QuantityPicker max={10 - ticketNumber.vip} min={0} value={ticketNumber.standard} smooth width='6.7rem' onChange={getStandardPickerValue} /></td>
+                            <td><QuantityPicker max={10 - ticketNumber.vip} min={0} value={ticketNumber.standard} smooth width='6.8rem' onChange={getStandardPickerValue} /></td>
                             <td>{priceStandard}</td>
                         </tr>
                         <tr>
                             <td>{data[1].name}</td>
                             <td>{data[1].price}</td>
-                            <td><QuantityPicker max={10 - ticketNumber.standard} min={0} value={ticketNumber.vip} smooth width='6.7rem' onChange={getVIPPickerValue} /></td>
+                            <td><QuantityPicker max={10 - ticketNumber.standard} min={0} value={ticketNumber.vip} smooth width='6.8rem' onChange={getVIPPickerValue} /></td>
                             <td>{priceVIP}</td>
                         </tr>
                     </tbody>

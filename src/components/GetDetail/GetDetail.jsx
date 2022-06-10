@@ -10,9 +10,13 @@ import { premiereListSelector } from '../../redux/selectors'
 import { fillPremiereList, fillBuyProcessObj } from '../../redux/action'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';    
+import useWindowDimensions from '../../CustomHook/useWindowDimensions';
 import FilmInfo from '../FilmInfoPage/FilmInfo';
 
 const GetDetail = () => {
+
+    const { height, width } = useWindowDimensions();
+
     React.useEffect(() => {
         window.scrollTo(0, 0)
       }, [])

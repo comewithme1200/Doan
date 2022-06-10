@@ -9,20 +9,23 @@ import axios from 'axios';
 
 const Login = () => {
     const [loginStatus, setLoginStatus] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleLogin = (e) => {
-
+        console.log(password);
+        console.log(email);
         e.preventDefault();
-        if (!getData.password) {
+        if (!password) {
             alert("Chưa nhập mật khẩu");
             return;
         }
         const loginData = {
-            email: getData.email,
-            password: getData.password
+            email: email,
+            password: password
         }
 
         axios.post('users/login', loginData).then(res => {
@@ -43,8 +46,6 @@ const Login = () => {
         })
     };
 
-    const getData = {}
-
     return (
         <div className={styles.login_container}>
             <form onSubmit={handleLogin}>
@@ -56,11 +57,11 @@ const Login = () => {
                 )}
                 <div className='form-group'>
                     <label>Email</label>
-                    <input type="email" className='form-control' placeholder='Email' onChange={e => getData.email = e.target.value}/>
+                    <input type="email" className='form-control' placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
                 </div>
                 <div className='form-group'>
                     <label>Password</label>
-                    <input type="password" className='form-control' placeholder='Password' onChange={e => getData.password = e.target.value}/>
+                    <input type="password" className='form-control' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)}/>
                 </div>
 
                 <div className={styles.button_container}>

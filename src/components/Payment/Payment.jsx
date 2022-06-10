@@ -22,6 +22,7 @@ const Payment = () => {
     }
     return (
         <div className={styles.container}>
+            <div></div>
             <div className={styles.note}>Lựa chọn hình thức thanh toán</div>
             <div className={styles.payment} onChange={event => setGender(event)}>
             <span className={styles.span}>

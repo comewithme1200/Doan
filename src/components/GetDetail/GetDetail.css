@@ -57,3 +57,10 @@
     height: 25vh;
     color: red;
 }
+
+
+@media screen and (max-width: 900px) {
+    .Datecard_container {
+        white-space: pre-wrap;
+    }
+}

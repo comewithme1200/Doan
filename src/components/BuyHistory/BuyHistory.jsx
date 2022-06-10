@@ -3,7 +3,9 @@ import styles from './BuyHistory.module.css';
 import { useSelector } from 'react-redux';
 import { userInfoSelector } from '../../redux/selectors';
 import HistoryCard from '../HistoryCard/HistoryCard';
+import 'antd/dist/antd.css';
 import { Link } from 'react-router-dom';
+import { Pagination } from 'antd';
 var axios = require('axios');
 
 const BuyHistory = () => {
@@ -37,6 +39,10 @@ const BuyHistory = () => {
     const handleGetInvoiceDetail = (invoice_id) => {
         console.log(invoice_id);
     }
+
+    const handlePagination = (current) => {
+        console.log(current);
+    }
     
 
     return (
@@ -50,6 +56,7 @@ const BuyHistory = () => {
                     <HistoryCard props={history} key={history.invoice_id}/>
                 </Link>
             ))}
+            <Pagination defaultCurrent={1} total={50} current onChange={() => handlePagination()}/>
         </div>
     );
 };

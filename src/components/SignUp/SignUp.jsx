@@ -21,6 +21,9 @@ const SignUp = () => {
         if (!getData.password) {
             alert("Chưa nhập mật khẩu");
             return;
+        } else if (!getData.tel) {
+            alert("Chưa nhập số điện thoại");
+            return;
         }
         const signupData = {
             email: getData.email,

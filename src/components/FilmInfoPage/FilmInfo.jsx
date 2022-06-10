@@ -7,11 +7,7 @@ var axios = require('axios');
 const FilmInfo = (props) => {
 
     const { height, width } = useWindowDimensions();
-
-    console.log(height + " " + width);
-
-    console.log(props.movie_id);
-
+    
     const [movieInfo, setMovieInfo] = React.useState({});
 
     React.useEffect(() => {

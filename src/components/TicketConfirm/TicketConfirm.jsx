@@ -123,7 +123,7 @@ const TicketConfirm = () => {
             </div>
             <div className={styles.right}>
                 <div className={styles.timer_text}>Thời gian của bạn còn: </div>
-                <Countdown date={startDate.current + 150000} renderer={renderer}/>
+                <Countdown date={startDate.current + 150000000000} renderer={renderer}/>
             </div>
         </div>
     );

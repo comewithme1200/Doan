@@ -1,6 +1,6 @@
 import React from 'react';
 import { PayPalButtons } from '@paypal/react-paypal-js';
-import { totalBillSelector, seatChoosenSelector, premiereRoomInfoSelector, invoiceInfoSelector, buyProcessObjSelector } from '../../redux/selectors';
+import { totalBillSelector, seatChoosenSelector, premiereRoomInfoSelector, invoiceInfoSelector, buyProcessObjSelector, userInfoSelector } from '../../redux/selectors';
 import { changeIsPaid, fillTicketData } from '../../redux/action'
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate } from 'react-router';
@@ -19,6 +19,12 @@ const PaypalButton = () => {
     const invoiceInfo = useSelector(invoiceInfoSelector);
 
     const buyProcessObj = useSelector(buyProcessObjSelector);
+
+    const userInfo = useSelector(userInfoSelector);
+
+    const token = userInfo.token ? userInfo.token : localStorage.getItem('token');
+
+    const TOKEN = 'Bearer ' + token;
 
     const products = {
         description : "Vé xem phim",
@@ -44,7 +50,7 @@ const PaypalButton = () => {
               });
           }
           var data = JSON.stringify(updateSeatOccupiedData);
-          
+          // update seat
           var config = {
             method: 'put',
             url: '/seats',
@@ -61,11 +67,12 @@ const PaypalButton = () => {
           .catch(function (error) {
             console.log(error);
           });
+
           data = {
             id: invoiceInfo.invoiceId,
             status: 1
           };
-          
+          //update invoice status
           config = {
             method: 'put',
             url: '/invoice',
@@ -82,6 +89,22 @@ const PaypalButton = () => {
           .catch(function (error) {
             console.log(error);
           });
+          //update user level
+          config = {
+            method: 'put',
+            url: '/users/updateLevel',
+            headers: { 
+              'Authorization': TOKEN
+            }
+          };
+          axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
         //render ticket data
 
         var ticketData = [];
