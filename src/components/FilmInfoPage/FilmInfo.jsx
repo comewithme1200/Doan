@@ -31,7 +31,7 @@ const FilmInfo = (props) => {
 
     return (
         <div className={styles.container}>
-            <img src={"../../assets/" + movieInfo.image_path}/>
+            <img src={movieInfo.image_path}/>
             <div className={styles.movieInfo}>
                 <div className={styles.movieName}>{movieInfo.movie_name}</div>
                 <div className={styles.detail}>{movieInfo.detail}</div>

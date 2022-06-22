@@ -53,6 +53,11 @@ h2 {
     color: red;
 }
 
+img {
+    height: 340px;
+    width: auto;
+}
+
 @media screen and (max-width: 900px) {
     .pick_ticket_filmInfo_container{
         flex-direction: column;

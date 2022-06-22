@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from '../Slider/Slider';
 import MovieCarousel from '../MovieSlider/MovieCarousel';
 import SaleCarousel from '../SaleSlider/SaleCarousel';
-import { fillBuyProcessStatus, changeSeatChoosen, changeVipTicketNumber, changeStandardTicketNumber, changeIsPaid } from '../../redux/action';
+import { fillBuyProcessStatus, changeSeatChoosen, changeVipTicketNumber, changeStandardTicketNumber, changeIsPaid, fillInvoiceInfo } from '../../redux/action';
 import { seatChoosenSelector, invoiceInfoSelector, premiereRoomInfoSelector, isPaidSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import { useStateIfMounted } from 'use-state-if-mounted'
@@ -82,6 +82,11 @@ const MainContent = () => {
         dispatch(changeVipTicketNumber(0));
         dispatch(changeStandardTicketNumber(0));
         dispatch(changeIsPaid(false))
+        dispatch(fillInvoiceInfo({
+            invoiceId: '',
+            status: 0,
+            user_id: ''
+        }))
     }, []);
 
 

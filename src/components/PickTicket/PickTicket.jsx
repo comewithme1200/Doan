@@ -7,8 +7,6 @@ import styles from "./PickTicket.module.css";
 
 const PickTicket = () => {
 
-    const base_image_path = '../assets/';
-
     const dispatch = useDispatch();
     
     const buyProcessObj = useSelector(buyProcessObjSelector);
@@ -44,7 +42,7 @@ const PickTicket = () => {
         <div className={styles.pick_ticket_container}>
             <div className={styles.pick_ticket_filmInfo_container}>
                 <div className={styles.pick_ticket_filmInfo}>
-                    <img src={base_image_path + movieInfo.image_path}></img> 
+                    <img src={movieInfo.image_path}></img> 
                     <div className={styles.pick_ticket_ticketInfo}>
                         <div className={styles.pick_ticket_filmName}>{buyProcessObj.movie_name}</div>
                         <div className={styles.pick_ticket_preniereInfo}>Showing on {buyProcessObj.date}</div>

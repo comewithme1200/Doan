@@ -22,7 +22,7 @@ const MovieCard = ({data: {movie_name, id, image_path, detail, trailer_link}}) =
         <div className={styles.container}>
             <div className={styles.cardImage}>
                 <Link to={`getDetail/${id}/${movie_name}`}>
-                    <img alt="Poster" src={base_url+image_path}/>
+                    <img alt="Poster" src={image_path}/>
                 </Link>
             </div>
             <div className={styles.cardText}>

@@ -12,6 +12,8 @@ const BuyHistory = () => {
     
     const [buyHistory, setBuyHistory] = React.useState([]);
 
+    console.log(buyHistory);
+
     const userInfo = useSelector(userInfoSelector);
 
     const token = userInfo.token ? userInfo.token : localStorage.getItem('token');
@@ -43,8 +45,9 @@ const BuyHistory = () => {
     const handlePagination = (current) => {
         console.log(current);
     }
-    
 
+    const now = new Date().getTime();
+    
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -52,7 +55,7 @@ const BuyHistory = () => {
             </div>
             <hr className={styles.hr} />
             {buyHistory?.map((history) => (
-                <Link to={`/OnlineInvoice/${history.invoice_id}`}>
+                <Link to={ history.premiere_end_time > now ? `/OnlineInvoice/${history.invoice_id}` : '#'}>
                     <HistoryCard props={history} key={history.invoice_id}/>
                 </Link>
             ))}
