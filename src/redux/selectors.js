@@ -22,3 +22,5 @@ export const isPaidSelector = (state) => state.isPaid;
 
 export const ticketDataSelector = (state) => state.ticketData;
 
+export const ticketPriceSelector = (state) => state.ticketPrice;
+

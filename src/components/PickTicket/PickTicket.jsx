@@ -1,9 +1,10 @@
 import React from 'react';
 import { QuantityPicker } from 'react-qty-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { buyProcessObjSelector, ticketNumberSelector, movieInfoSelector } from '../../redux/selectors'
-import { changeStandardTicketNumber, changeVipTicketNumber } from '../../redux/action'
+import { buyProcessObjSelector, ticketNumberSelector, movieInfoSelector, premiereRoomInfoSelector, ticketPriceSelector } from '../../redux/selectors'
+import { changeStandardTicketNumber, changeVipTicketNumber, fillTicketPrice } from '../../redux/action'
 import styles from "./PickTicket.module.css";
+var axios = require('axios');
 
 const PickTicket = () => {
 
@@ -14,15 +15,41 @@ const PickTicket = () => {
     const ticketNumber = useSelector(ticketNumberSelector);
 
     const movieInfo = useSelector(movieInfoSelector);
+    
+    const premiereRoomInfo = useSelector(premiereRoomInfoSelector);
+
+    const ticketPrice = useSelector(ticketPriceSelector);
+
+    React.useEffect(() => {
+        var config = {
+            method: 'get',
+            url: '/price?premiere_id=' + premiereRoomInfo.premiere_id + '&room_id=' + premiereRoomInfo.room_id ,
+            headers: { 
+              'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+          };
+          
+          axios(config)
+          .then(function (response) {
+            dispatch(fillTicketPrice({
+                vip: response.data.vipPrice,
+                standard: response.data.standardPrice
+            }));
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }, []);
 
     const data = [
         {
             name: "Adult Standard 2D",
-            price: "90000",
+            price: ticketPrice.standard,
         },
         {
             name: "Adult VIP 2D",
-            price: "100000",
+            price: ticketPrice.vip,
         }
     ];
 
@@ -30,12 +57,12 @@ const PickTicket = () => {
     const [priceVIP, setPriceVIP] = React.useState(0);
 
     const getStandardPickerValue = (value) => {
-        setPriceStandard(value * 90000);
+        setPriceStandard(value * ticketPrice.standard);
         dispatch(changeStandardTicketNumber(value))
     }
 
     const getVIPPickerValue = (value) => {
-        setPriceVIP(value * 100000);
+        setPriceVIP(value * ticketPrice.vip);
         dispatch(changeVipTicketNumber(value))
     }
     return (

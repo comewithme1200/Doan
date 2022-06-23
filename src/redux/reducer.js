@@ -38,7 +38,11 @@ const initialValue = {
     buyProcessStatus: false,
     totalBill: 0,
     isPaid: false,
-    ticketData: []
+    ticketData: [],
+    ticketPrice: {
+        vip: 0,
+        standard: 0
+    }
 };
 
 const rootReducer = (state = initialValue, action) => {
@@ -114,7 +118,11 @@ const rootReducer = (state = initialValue, action) => {
                 ...state,
                 ticketData: action.payload
             }
-            
+        case 'fillTicketPrice':
+            return {
+                ...state,
+                ticketPrice: action.payload
+            }   
         default:
             return state;
 

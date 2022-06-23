@@ -3,7 +3,7 @@ import styles from "./TicketConfirm.module.css";
 import Countdown from 'react-countdown';
 import { Navigate } from 'react-router'
 import { useSelector } from 'react-redux';
-import { premiereRoomInfoSelector, seatChoosenSelector, buyProcessObjSelector, ticketNumberSelector } from '../../redux/selectors'
+import { premiereRoomInfoSelector, seatChoosenSelector, buyProcessObjSelector, ticketNumberSelector, ticketPriceSelector } from '../../redux/selectors'
 import axios from 'axios';
 
 const TicketConfirm = () => {
@@ -16,6 +16,8 @@ const TicketConfirm = () => {
     const buyProcessObj = useSelector(buyProcessObjSelector);
 
     const ticketNumber = useSelector(ticketNumberSelector);
+
+    const ticketPrice = useSelector(ticketPriceSelector);
 
     const renderUpdateData = () => {
         var resultData = [];
@@ -107,14 +109,14 @@ const TicketConfirm = () => {
                         {ticketNumber.standard !== 0 && (
                             <tr>
                                 <td>Adult Standard 2D</td>
-                                <td>{90000 * ticketNumber.standard}</td>
+                                <td>{ticketPrice.standard * ticketNumber.standard}</td>
                                 <td>{ticketNumber.standard}</td>
                             </tr>    
                         )}
                         {ticketNumber.vip !== 0 && (
                             <tr>
                                 <td>Adult VIP 2D</td>
-                                <td>{100000 * ticketNumber.vip}</td>
+                                <td>{ticketPrice.vip * ticketNumber.vip}</td>
                                 <td>{ticketNumber.vip}</td>
                             </tr>    
                         )}
@@ -123,7 +125,7 @@ const TicketConfirm = () => {
             </div>
             <div className={styles.right}>
                 <div className={styles.timer_text}>Thời gian của bạn còn: </div>
-                <Countdown date={startDate.current + 150000000000} renderer={renderer}/>
+                <Countdown date={startDate.current + 150000} renderer={renderer}/>
             </div>
         </div>
     );

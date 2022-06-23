@@ -6,7 +6,7 @@ import {
   useParams,
 } from "react-router-dom";
 import PickTicket from '../PickTicket/PickTicket';
-import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector, userInfoSelector, invoiceInfoSelector } from '../../redux/selectors'
+import { ticketNumberSelector, premiereRoomInfoSelector, seatChoosenSelector, userInfoSelector, invoiceInfoSelector, ticketPriceSelector } from '../../redux/selectors'
 import { useSelector, useDispatch } from 'react-redux';
 import TicketConfirm from '../TicketConfirm/TicketConfirm';
 import { fillInvoiceInfo, fillBuyProcessStatus, fillTotalBill } from '../../redux/action'
@@ -34,6 +34,8 @@ const BuyProcess = () => {
   const userInfo = useSelector(userInfoSelector);
 
   const invoiceInfo = useSelector(invoiceInfoSelector);
+
+  const ticketPrice = useSelector(ticketPriceSelector);
 
   React.useEffect(() => {
     dispatch(fillBuyProcessStatus(true));
@@ -77,7 +79,7 @@ const BuyProcess = () => {
           setCurrent(current + 1);
           setRoomId(roomPremiereInfo.room_id);
           setPremiereId(roomPremiereInfo.premiere_id);
-          const totalBill = ticketNumber.standard * 90000 + ticketNumber.vip * 100000;
+          const totalBill = ticketNumber.standard * ticketPrice.standard + ticketNumber.vip * ticketPrice.vip;
           console.log(totalBill);
           dispatch(fillTotalBill(totalBill));
         } else {
@@ -124,7 +126,7 @@ const BuyProcess = () => {
           seatList.push({
               seat_id : seat.seat_id,
               premiere_id: roomPremiereInfo.premiere_id,
-              price: seat.type === 'vip' ? 100000 : 90000
+              price: seat.type === 'vip' ? ticketPrice.vip : ticketPrice.standard
           });
         } 
         const data = {

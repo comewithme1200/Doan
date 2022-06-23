@@ -88,3 +88,10 @@ export const fillTicketData = (ticketData) => {
     }
 }
 
+export const fillTicketPrice = (ticketPrice) => {
+    return {
+        type: 'fillTicketPrice',
+        payload: ticketPrice
+    }
+}
+
